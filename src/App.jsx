@@ -1,0 +1,32 @@
+import { useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import Home from './Pages/Home'
+import NavBar from './components/navBar'
+import {Routes, Route} from 'react-router-dom'
+import './css/App.css'
+import GamePage from './Pages/GamePage'
+import PalavrasPage from './Pages/Palavras'
+import ConexaoPage from './Pages/Conexao'
+import Footer from './components/footer'
+import LoginPage from './Pages/login'
+
+function App() {
+  return (
+    <div className="app-container">
+      <NavBar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/games" element={<GamePage />} />
+          <Route path="/palavras" element={<PalavrasPage />} />
+          <Route path="/conexao" element={<ConexaoPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default App

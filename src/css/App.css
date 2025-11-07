@@ -1,0 +1,63 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* App wrapper */
+.app-container {
+  min-height: 100vh;           /* fill entire viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content expands to fill space */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+.navbar {
+  padding: 1rem;
+  }
+  nav {
+    text-align: center;
+    padding: 1rem 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    background-color: linear-gradient(to bottom right, #4c1d95, #3730a3, #2563eb);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem;
+  }
+  
+  .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  }
+

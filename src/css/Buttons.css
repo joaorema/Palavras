@@ -1,0 +1,13 @@
+.backbtn{
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, opacity 0.3s;
+
+}

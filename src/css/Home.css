@@ -1,0 +1,57 @@
+/* Center the content like the login box */
+.top-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+  color: #fff;
+  background: transparent; /* background comes from :root gradient */
+}
+
+/* Title */
+.top-div h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Glassy button style (similar to login) */
+.btn1 {
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+/* Hover effect */
+.btn1:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Add spacing for when you add more buttons later */
+.top-div button + button {
+  margin-top: 1rem;
+}
+
+/* Optional: make the whole section responsive */
+@media (max-width: 600px) {
+  .top-div h1 {
+    font-size: 2rem;
+  }
+
+  .btn1 {
+    width: 80%;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}
