@@ -1,5 +1,5 @@
-const Database = requires('better-sqlite3');
-const path = requite('path');
+const Database = require('better-sqlite3');
+const path = require('path');
 
 // Create database file in the parent directory
 const db = new Database(path.join(__dirname, '..', 'database.db'));
