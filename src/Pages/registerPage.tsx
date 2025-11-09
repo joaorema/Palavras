@@ -1,20 +1,43 @@
 import "../css/register.css";
 import { useState } from "react";
+import { api } from "../api/api";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const handleForm = () => {
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const handleForm = async () => {
+    setError("") //reset 
+
     if (!username || !email || !password) {
       setError("Username, Email or Password missing");
       return;
     }
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    if(password.length < 4)
+    {
+        setError("Password must have atleast 4 characthers")
+        return;
+    }
+    setLoading(true);
+    try{
+        const data = await api.register(username,email,password);
+        console.log("Registration worked!", data);
+        navigate("/home")
+    }
+    catch(err)
+    {
+        setError("Registration error");
+        console.log("Registration failed", err);
+    }
+    finally{
+        setLoading(false);
+    }
   };
+  
   const GoogleBtn = () => {
     console.log("coming later!");
   };

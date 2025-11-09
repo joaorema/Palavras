@@ -1,19 +1,35 @@
 import "../css/login.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { api } from "../api/api";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
-  const loginClick = () => {
-    if (!email || !password) {
+  
+  const loginClick = async () => {
+    setError("")
+    if (!username || !password) {
       setError("Email or Password missing");
       return;
     }
-    console.log(email);
-    console.log(password);
+    setLoading(true)
+    try{
+      const data = await api.login(username, password);
+      console.log("login worked!");
+      navigate("/home")
+    }
+    catch(err)
+    {
+      console.log("login failed", err);
+      
+    }
+    finally{
+      setLoading(false);
+    }
   };
   const registerClick = () => {
     navigate("/register");
@@ -27,9 +43,9 @@ function LoginPage() {
           <form>
             <input
               type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="text"
