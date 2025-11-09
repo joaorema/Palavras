@@ -12,6 +12,7 @@ import ConexaoPage from './Pages/Conexao'
 import Footer from './components/footer'
 import LoginPage from './Pages/login'
 import RegisterPage from './Pages/registerPage'
+import WordleGame from './Wordle'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/conexao" element={<ConexaoPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/wordle" element={<WordleGame />} />
         </Routes>
       </main>
       <Footer />

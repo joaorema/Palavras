@@ -1,0 +1,207 @@
+/* wordle.css */
+
+.wordle-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.wordle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.wordle-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #333;
+}
+
+.reset-btn {
+  padding: 10px 20px;
+  background-color: #6aaa64;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+  background-color: #5a9a54;
+}
+
+/* Game Grid Styles */
+.wordle-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.wordle-row {
+  display: flex;
+  gap: 5px;
+}
+
+.wordle-cell {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #d3d6da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: white;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.wordle-cell.filled {
+  border-color: #878a8c;
+  animation: pop 0.1s ease-in-out;
+}
+
+/* Letter status colors (like real Wordle) */
+.wordle-cell.correct {
+  background-color: #6aaa64; /* Green - correct position */
+  border-color: #6aaa64;
+  color: white;
+}
+
+.wordle-cell.present {
+  background-color: #c9b458; /* Yellow - wrong position */
+  border-color: #c9b458;
+  color: white;
+}
+
+.wordle-cell.absent {
+  background-color: #787c7e; /* Gray - not in word */
+  border-color: #787c7e;
+  color: white;
+}
+
+/* Pop animation when typing */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Keyboard Styles */
+.wordle-keyboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.keyboard-key {
+  min-width: 40px;
+  height: 58px;
+  padding: 0 10px;
+  background-color: #d3d6da;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  color: #000;
+}
+
+.keyboard-key:hover:not(:disabled) {
+  background-color: #bbb;
+}
+
+.keyboard-key:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.keyboard-key:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.keyboard-key.special-key {
+  min-width: 65px;
+  font-size: 0.8rem;
+  background-color: #aaa;
+}
+
+/* Keyboard color feedback */
+.keyboard-key.correct {
+  background-color: #6aaa64;
+  color: white;
+}
+
+.keyboard-key.present {
+  background-color: #c9b458;
+  color: white;
+}
+
+.keyboard-key.absent {
+  background-color: #787c7e;
+  color: white;
+}
+
+/* Game Status */
+.game-status {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .wordle-cell {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .keyboard-key {
+    min-width: 30px;
+    height: 50px;
+    font-size: 0.9rem;
+    padding: 0 6px;
+  }
+
+  .keyboard-key.special-key {
+    min-width: 50px;
+    font-size: 0.7rem;
+  }
+
+  .wordle-header h1 {
+    font-size: 1.5rem;
+  }
+}
