@@ -13,28 +13,25 @@ html, body, #root {
 
 /* Main content expands to fill space */
 .main-content {
-  flex: 1;
-  padding: 2rem;
+  flex: 1;               /* expands to fill vertical space */
+  padding: 1rem;
   box-sizing: border-box;
+  display: flex;         /* optional, helps with centering */
+  flex-direction: column;
+  justify-content: center; /* centers vertically if you want */
+  align-items: center;
+  
 }
 
 /* Footer styling */
-footer {
-  text-align: center;
-  padding: 1rem;
-  color: white;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
 
 
-.navbar {
+.navbar-footer {
   padding: 1rem;
   }
   nav {
     text-align: center;
-    padding: 1rem 2rem;
+    padding: 1rem;
     color: white;
     background: rgba(0, 0, 0, 0.3);
     background-color: linear-gradient(to bottom right, #4c1d95, #3730a3, #2563eb);

@@ -1,0 +1,11 @@
+.footer-bar {
+  text-align: center;
+  padding: 1rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: auto; /* ensures it stays at bottom if parent is flex column */
+  width: 100%;
+}
