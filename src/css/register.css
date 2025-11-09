@@ -1,0 +1,77 @@
+/* Center the login box in the viewport */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  background: transparent; /* your gradient already applies from :root */
+}
+
+/* The box/card */
+.register-box {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 380px;
+  color: #fff;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Title */
+.register-box h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Input fields */
+.register-box input {
+  display: block;
+  width: 85%;              /* smaller width inside the box */
+  margin: 0.6rem auto;     /* centers inputs and adds spacing */
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.register-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.register-box input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Buttons (both Login and Register) */
+.register-box button {
+  width: 85%;               /* same width as inputs */
+  padding: 0.8rem;
+  margin-top: 0.8rem;       /* space between buttons */
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.register-box button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Optional: make Register button visually distinct */
+.register-box > button:last-of-type {
+  background: linear-gradient(135deg, #9333ea, #a855f7);
+}

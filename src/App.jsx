@@ -11,6 +11,7 @@ import PalavrasPage from './Pages/Palavras'
 import ConexaoPage from './Pages/Conexao'
 import Footer from './components/footer'
 import LoginPage from './Pages/login'
+import RegisterPage from './Pages/registerPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/palavras" element={<PalavrasPage />} />
           <Route path="/conexao" element={<ConexaoPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </main>
       <Footer />
