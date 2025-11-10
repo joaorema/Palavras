@@ -30,6 +30,14 @@ fastify.decorate('authenticate', async function(request, reply){
 //register auth routes
 fastify.register(require('./routes/auth'), {prefix: '/auth'});
 
+//updates player scores
+fastify.register(require('./routes/game'), {prefix : '/api/game'});
+
+//check server state
+fastify.get('/health', async (request, reply) => {
+    return { status: 'ok', message: 'Backend is running!' };
+});
+
 //start server back end
 const start = async () =>{
     try{
@@ -41,10 +49,6 @@ const start = async () =>{
         fastify.log.error(err);
         process.exit(1);
     }
-}
+};
 
-//check server state
-fastify.get('/health', async (request, reply) => {
-    return { status: 'ok', message: 'Backend is running!' };
-});
 start();

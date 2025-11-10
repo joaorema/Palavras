@@ -62,4 +62,41 @@ export const api = {
   isAuthenticated() {
     return !!localStorage.getItem('token');
   },
+
+  async addWin(gameType)
+  {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error("No JWT token found! Please login.");
+    //console.log(token);
+    const response = await fetch('http://localhost:3000/api/game/win', {
+      method: 'POST',
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({gameType}),
+    });
+    const data = await response.json();
+    if(!response.ok)
+      throw new Error(data.error || 'Failed to update wins!');
+    return data;
+  },
+
+  async getWins()
+  {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error("No JWT token found! Please login.");
+    
+    const response = await fetch('http://localhost:3000/api/game/wins', {
+      method: 'GET',
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if(!response.ok)
+      throw new Error(data.error || 'Failed to fetch wins!');
+    return data;
+  }
 };

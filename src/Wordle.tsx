@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
 import './css/wordle.css'
+import { api } from "./api/api";
 
 const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];
 const WORD_LENGTH = 5; 
@@ -49,7 +50,7 @@ function WordleGame() {
     setCurrentGuess(currentguess.slice(0, -1));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (currentguess.length !== WORD_LENGTH) { // ← Use constant
       alert("Palavra incompleta!");
       return;
@@ -68,6 +69,18 @@ function WordleGame() {
       setTimeout(() => {
         alert("Parabéns! Você ganhou! ");
       }, 500);
+      const user = api.getCurrentUser();
+      if(user)
+      {
+        try{
+          await api.addWin('wordle')
+          console.log("added a win to player db");
+        }
+        catch(err)
+        {
+          console.error("failed to register win!", err);
+        }
+      }
       return;
     }
 

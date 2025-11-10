@@ -1,19 +1,36 @@
 import { api } from "../api/api";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import '../css/Profile.css'
+import "../css/Profile.css";
 
 function ProfilePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(api.isAuthenticated());
   const [user, setUser] = useState(null);
+  const [gameStats, setGameStats] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
   useEffect(() => {
     const currentUser = api.getCurrentUser();
-    if (!currentUser) 
-        navigate("/home");
-    else 
-        setUser(currentUser);
+    if (!currentUser) navigate("/home");
+    else {
+      setUser(currentUser);
+      fetchWins();
+    }
   }, [navigate]);
+
+  const fetchWins = async () => {
+    try {
+      setLoading(true);
+      const data = await api.getWins();
+      setGameStats(data);
+    } catch (error) {
+      console.error("Failed to fetch wins:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const currentUser = api.getCurrentUser();
   const handleLogout = () => {
     api.logout();
@@ -36,18 +53,35 @@ function ProfilePage() {
           </p>
         </div>
 
-        {/* Example stats section — adapt to your DB */}
+        {/* Game stats section */}
         <div className="profile-stats">
           <h3>Game Stats</h3>
-          <p>
-            <strong>Total Games:</strong> {currentUser.totalGames || 0}
-          </p>
-          <p>
-            <strong>Wins:</strong> {currentUser.wins || 0}
-          </p>
-          <p>
-            <strong>Best Score:</strong> {currentUser.bestScore || 0}
-          </p>
+          {loading ? (
+            <p>Loading stats...</p>
+          ) : gameStats ? (
+            <>
+              <p>
+                <strong>Total Wins:</strong> {gameStats.totalWins || 0}
+              </p>
+              {gameStats.stats &&
+                gameStats.stats.map((stat) => (
+                  <div key={stat.game_type} className="game-type-stats">
+                    <p>
+                      <strong>{stat.game_type}:</strong>
+                    </p>
+                    <ul>
+                      <li>Wins: {stat.wins}</li>
+                      <li>Losses: {stat.losses}</li>
+                      <li>Level: {stat.level}</li>
+                      <li>Current Streak: {stat.current_streak}</li>
+                      <li>Best Streak: {stat.best_streak}</li>
+                    </ul>
+                  </div>
+                ))}
+            </>
+          ) : (
+            <p>No stats available</p>
+          )}
         </div>
 
         <button className="logout-btn" onClick={handleLogout}>
