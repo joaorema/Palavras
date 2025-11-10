@@ -1,4 +1,4 @@
-# Palavras / Conexões — 
+# Palavras / Conexões 
  
 - **React 18**
 - **TypeScript**
@@ -6,11 +6,17 @@
 - **Vite**
 - **Fastify**
 
-Simple react app/website.
+<p></p>
+<h1>React Project</h1>
+<p></p>
 -Simple login and register (need to improve)
+<p></p>
 -2 Games (1 implemented)
+<p></p>
 -Wordle(typescript)
+<p></p>
 Simple css configs might change to tailwind later
+<p></p>
 
 ## 🧩 Getting Started
 ```bash
