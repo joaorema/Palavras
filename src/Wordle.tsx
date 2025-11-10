@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import './css/wordle.css'
 
 const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];
-const WORD_LENGTH = 5; // ← Add this constant
+const WORD_LENGTH = 5; 
 
 const KEYBOARD_ROWS = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -37,10 +37,10 @@ function WordleGame() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentguess, gameover, targetword]); // ← Added targetword dependency
+  }, [currentguess, gameover, targetword]); 
 
   const handleKeyPress = (letter) => {
-    if (currentguess.length < WORD_LENGTH) { // ← Use constant instead
+    if (currentguess.length < WORD_LENGTH) { 
       setCurrentGuess(currentguess + letter);
     }
   };
@@ -66,7 +66,7 @@ function WordleGame() {
       setWon(true);
       setGameOver(true);
       setTimeout(() => {
-        alert("Parabéns! Você ganhou! 🎉");
+        alert("Parabéns! Você ganhou! ");
       }, 500);
       return;
     }

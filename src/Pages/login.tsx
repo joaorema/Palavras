@@ -20,12 +20,13 @@ function LoginPage() {
     try{
       const data = await api.login(username, password);
       console.log("login worked!");
+      alert("Login Worked!");
       navigate("/home")
     }
     catch(err)
     {
       console.log("login failed", err);
-      
+      setError("Invalid credentials");
     }
     finally{
       setLoading(false);
