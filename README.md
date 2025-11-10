@@ -1,8 +1,10 @@
 # Palavras / Conexões — 
  
-## Tech Stack
-- **React 18 , TypeScript and JavaScript**
+- **React 18**
+- **TypeScript**
+- **JavaScript**
 - **Vite**
+- **Fastify**
 
 Simple react app/website.
 -Simple login and register (need to improve)
