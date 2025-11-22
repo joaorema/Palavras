@@ -1,6 +1,6 @@
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
-import BackBtn from "../components/backBtn";
 import "../css/GamePage.css";
+import GameCard from "../components/Card";
 
 function GamePage() {
   const navigate = useNavigate();
@@ -13,17 +13,32 @@ function GamePage() {
   const backBtnClick = () =>{
     navigate("/home")
   }
+  const Games = [
+    {
+      title: "Palavras",
+      videoSrc: "../../public/palavrasvideo.webm",
+      //imageSrc: "../../public/PalavrasPhoto.png",
+      onClick: () => navigate("/wordle"),
+    },
+    {
+      title: "Conexões",
+      videoSrc: "../../public/conexoesvideo.webm",
+      //imageSrc: "../../public/incoming.png",
+      onClick: () => navigate("/conexao"),
+    },
+  ];
 
   return (
     <>
       <div className="home-container">
         <div className="button-div">
-          <button className="btn1" onClick={btn1Click}>Palavras</button>
-          <button className="btn2" onClick={btn2Click}>Conexões</button>
+          {Games.map((game, index) => (
+          <GameCard key={index} {...game} />
+        ))}
         </div>
 
         <div className="backbtn-div">
-          <button className="back-btn" onClick={backBtnClick}>Back</button>
+          <button className="back-btn" onClick={backBtnClick}>Voltar</button>
         </div>
       </div>
     </>

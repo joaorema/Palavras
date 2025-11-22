@@ -30,7 +30,9 @@ function ProfilePage() {
       setLoading(false);
     }
   };
-
+  function capitalizeName(name: string) {
+    return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
+  }
   const currentUser = api.getCurrentUser();
   const handleLogout = () => {
     api.logout();
@@ -67,14 +69,11 @@ function ProfilePage() {
                 gameStats.stats.map((stat) => (
                   <div key={stat.game_type} className="game-type-stats">
                     <p>
-                      <strong>{stat.game_type}:</strong>
+                      <strong>{capitalizeName(stat.game_type)}:</strong>
                     </p>
                     <ul>
                       <li>Wins: {stat.wins}</li>
                       <li>Losses: {stat.losses}</li>
-                      <li>Level: {stat.level}</li>
-                      <li>Current Streak: {stat.current_streak}</li>
-                      <li>Best Streak: {stat.best_streak}</li>
                     </ul>
                   </div>
                 ))}

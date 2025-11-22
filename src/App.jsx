@@ -14,6 +14,7 @@ import LoginPage from './Pages/login'
 import RegisterPage from './Pages/registerPage'
 import WordleGame from './Wordle'
 import ProfilePage from './Pages/Profile'
+import ConnectionGame from './connections'
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/games" element={<GamePage />} />
           <Route path="/palavras" element={<PalavrasPage />} />
-          <Route path="/conexao" element={<ConexaoPage />} />
+          <Route path="/conexao" element={<ConnectionGame />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/wordle" element={<WordleGame />} />

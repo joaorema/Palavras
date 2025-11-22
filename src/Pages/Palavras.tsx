@@ -1,7 +1,7 @@
 import BackBtn from "../components/backBtn";
 import "../css/Home.css";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import "../css/Buttons.css";
 
 function PalavrasPage() {
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ function PalavrasPage() {
   return (
     <div className="home-container">
       <h1>Palavras Game</h1>
-      <button className="start-btn" onClick={startBtn}>Start</button>
-      <button className="btn1" onClick={backBtnClick}>Back</button>
+      <button className="start-btn" onClick={startBtn}>Comecar</button>
+      <button className="backbtn" onClick={backBtnClick}>Voltar</button>
     </div>
   );
 }

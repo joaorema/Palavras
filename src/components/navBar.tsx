@@ -24,7 +24,7 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-links">
+      <div className="navbar-links" style={{fontSize: "20px", fontWeight: 700 }}>
         <Link to="/home" className="nav-link">
           Home
         </Link>

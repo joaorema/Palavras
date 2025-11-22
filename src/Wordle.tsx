@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import './css/wordle.css'
 import { api } from "./api/api";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];
 const WORD_LENGTH = 5; 
@@ -21,6 +22,11 @@ function WordleGame() {
   const [won, setWon] = useState(false);
   const [letterstatus, setLetterStatus] = useState({});
 
+  const navigate = useNavigate()
+
+  const backbtn = () => {
+    navigate("/games")
+  }
   // Initialize game
   useEffect(() => {
     const pickedWord = words[Math.floor(Math.random() * words.length)];
@@ -142,11 +148,8 @@ function WordleGame() {
 
   return (
     <div className="wordle-container">
-      <div className="wordle-header">
+      <div>
         <h1>Palavras</h1>
-        <button onClick={resetGame} className="reset-btn">
-          Novo Jogo
-        </button>
       </div>
 
       {/* Game Grid */}
@@ -204,6 +207,12 @@ function WordleGame() {
             })}
           </div>
         ))}
+        <div style={{maxHeight: '600px', padding: '20px', alignItems: 'center', display: 'flex', marginBottom: '20px', justifyContent: 'center', gap: '10px'}}>
+          <button onClick={resetGame} className="reset-btn">
+          Novo Jogo
+        </button>
+        <button style={{height : '40px', width: '80px', background: 'linear-gradient(135deg, #6366f1, #3b82f6', borderRadius:'0.7rem'}} onClick={backbtn}>Voltar</button>
+      </div>
       </div>
 
       {/* Game status */}
