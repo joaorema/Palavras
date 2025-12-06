@@ -1,34 +1,14 @@
 // @ts-nocheck
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import Button1 from "./components/button1";
+import { levels } from "./Pages/conexaolvls";
+import Button2 from "./components/button2";
+import "/src/css/connections.css";
 
 //game info
-const connectionPacks = [
-  {
-    words: ["Limão", "Baunilha", "Chocolate", "Menta"],
-    category: "Sabores de Gelado",
-    difficulty: "fácil",
-    color: "#f9df6d"
-  },
-  {
-    words: ["Veloz", "Ágil", "Depressa", "Rápido"],
-    category: "Sinónimos de Rápido",
-    difficulty: "médio",
-    color: "#a0c35a"
-  },
-  {
-    words: ["Onda", "Areia", "Concha", "Maré"],
-    category: "Praia",
-    difficulty: "médio",
-    color: "#b0c4ef"
-  },
-  {
-    words: ["Tom", "Nota", "Tempo", "Ritmo"],
-    category: "Elementos Musicais",
-    difficulty: "difícil",
-    color: "#ba81c5"
-  }
-];
+const randomIndex = Math.floor(Math.random() * levels.length)
+const connectionPacks = levels[randomIndex]
 
 //shuffle ft
 function shuffle(array) {
@@ -57,7 +37,10 @@ function ConnectionGame() {
     initializeGame();
   }, []);
 
-  const initializeGame = () => {
+  const initializeGame = () => 
+  {
+    const randomLvlIndex = Math.floor(Math.random() * levels.length)
+    
     const flatWords = connectionPacks.flatMap(pack =>       //breaks the array into 16 individual objects (text:limao , category : sabores de gelado, color)
       pack.words.map(word => ({                             //
         text: word,
@@ -190,12 +173,9 @@ function ConnectionGame() {
       {solvedGroups.map((group, index) => (
         <div 
           key={index}
+          className="solved-div"
           style={{
             background: group.color,
-            padding: '20px',
-            borderRadius: '10px',
-            marginBottom: '12px',
-            textAlign: 'center'
           }}
         >
           <div style={{ fontWeight: '700', marginBottom: '8px', fontSize: '1.1rem' }}>
@@ -209,31 +189,11 @@ function ConnectionGame() {
 
       {/* Grelha de Palavras */}
       {!gameOver && remainingWords.length > 0 && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '12px',
-          marginBottom: '20px'
-        }}>
+        <div className="word-grid">
           {remainingWords.map((word, index) => {
             const isSelected = selectedWords.find(w => w.text === word.text);
             return (
-              <div
-                key={index}
-                onClick={() => toggleWord(word)}
-                style={{
-                  background: isSelected ? '#1e293b' : '#8f036c',
-                  padding: '20px 16px',
-                  borderRadius: '10px',
-                  textAlign: 'center',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  border: isSelected ? '3px solid #fbbf24' : '1px solid #ccc',
-                  color: 'white',
-                  transition: 'all 0.2s',
-                  transform: isSelected ? 'scale(0.95)' : 'scale(1)'
-                }}
-              >
+              <div className="map-div" key={index} onClick={() => toggleWord(word)} style={{background: isSelected ? '#1e293b' : '#8f036c',border: isSelected ? '3px solid #fbbf24' : '1px solid #ccc',transform: isSelected ? 'scale(0.95)' : 'scale(1)'}}>
                 {word.text}
               </div>
             );
@@ -242,93 +202,16 @@ function ConnectionGame() {
       )}
 
       {/* Botões de Ação */}
-      {!gameOver && remainingWords.length > 0 && (
-        <div style={{
-          display: 'flex',
-          gap: '12px',
-          justifyContent: 'center',
-          flexWrap: 'wrap'
-        }}>
-          <button
-            onClick={handleShuffle}
-            style={{
-              padding: '14px 40px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              color: '#fff',
-              background: 'linear-gradient(135deg, #6366f1, #3b82f6)',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
-              transition: 'transform 0.2s'
-            }}
-            onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}
-            onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            Baralhar
-          </button>
-          <button
-            onClick={handleDeselectAll}
-            disabled={selectedWords.length === 0}
-            style={{
-              padding: '14px 40px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: selectedWords.length === 0 ? 'not-allowed' : 'pointer',
-              color: '#fff',
-              background: selectedWords.length === 0 ? '#94a3b8' : 'linear-gradient(135deg, #ec4899, #f43f5e)',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
-              transition: 'transform 0.2s',
-              opacity: selectedWords.length === 0 ? 0.6 : 1
-            }}
-            onMouseDown={(e) => selectedWords.length > 0 && (e.currentTarget.style.transform = 'scale(0.95)')}
-            onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            Desselecionar
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={selectedWords.length !== 4}
-            style={{
-              padding: '14px 40px',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: selectedWords.length !== 4 ? 'not-allowed' : 'pointer',
-              color: '#fff',
-              background: selectedWords.length !== 4 ? '#94a3b8' : 'linear-gradient(135deg, #02251aff, #059669)',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
-              transition: 'transform 0.2s',
-              opacity: selectedWords.length !== 4 ? 0.6 : 1
-            }}
-            onMouseDown={(e) => selectedWords.length === 4 && (e.currentTarget.style.transform = 'scale(0.95)')}
-            onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            Submeter
-          </button>
+      {!gameOver && remainingWords.length > 0 && 
+      (
+        <div className="multiple-btns">
+          <Button2 onClick={handleShuffle} title="Baralhar"></Button2>
+          <Button2 onClick={handleDeselectAll} title="Remover Escolhas"></Button2>
+          <Button2 onClick={handleSubmit} title="Submeter"></Button2>
         </div>
       )}
-      <div style={{maxHeight: '600px', padding: '20px', alignItems: 'center', display: 'flex', marginBottom: '20px', justifyContent: 'center', gap: "10px" }}>
-        <button 
-          onClick={initializeGame}
-          style={{
-            padding: '10px 20px',
-            fontSize: '1rem',
-            fontWeight: '600',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            background: '#1ba100ff',
-            color: 'white'
-          }}
-        >
-          Novo Jogo
-        </button>
-        <button style={{height : '40px', width: '80px', background: 'linear-gradient(135deg, #6366f1, #3b82f6', borderRadius:'0.7rem'}} onClick={backBtn}>Voltar</button>
+      <div className="mostbottomdiv">
+        <Button1 href="/games" title="Voltar"></Button1>  
       </div>
     </div>
   );

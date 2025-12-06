@@ -3,9 +3,14 @@ import { useState, useEffect } from "react";
 import './css/wordle.css'
 import { api } from "./api/api";
 import { Navigate, useNavigate } from "react-router-dom";
+import Button1 from "./components/button1";
+import Button2 from "./components/button2";
+import { wordsmap } from "./Pages/palavraslvls.tsx";
+
 
 const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];
 const WORD_LENGTH = 5; 
+
 
 const KEYBOARD_ROWS = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -143,6 +148,7 @@ function WordleGame() {
     setGameOver(false);
     setWon(false);
     setLetterStatus({});
+    
     console.log("New word: ", randomWord);
   };
 
@@ -208,10 +214,7 @@ function WordleGame() {
           </div>
         ))}
         <div style={{maxHeight: '600px', padding: '20px', alignItems: 'center', display: 'flex', marginBottom: '20px', justifyContent: 'center', gap: '10px'}}>
-          <button onClick={resetGame} className="reset-btn">
-          Novo Jogo
-        </button>
-        <button style={{height : '40px', width: '80px', background: 'linear-gradient(135deg, #6366f1, #3b82f6', borderRadius:'0.7rem'}} onClick={backbtn}>Voltar</button>
+        <Button1 href="/games" title="Voltar"></Button1>
       </div>
       </div>
 

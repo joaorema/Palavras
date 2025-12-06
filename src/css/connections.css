@@ -46,3 +46,45 @@ padding: 0.9rem 5rem;
     margin-top: 20px;
     gap : 12px;
 }
+
+.mostbottomdiv {
+  max-height: 600px;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.multiple-btns{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.map-div{
+  padding: 20px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  color:white;
+  transition: all;
+}
+
+.word-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.solved-div{
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  text-align: center;
+
+}

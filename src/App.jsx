@@ -18,7 +18,7 @@ import ConnectionGame from './connections'
 
 function App() {
   return (
-    <div className="app-container">
+    <div className="app-container bg-bg1">
       <NavBar />
       <main className="main-content">
         <Routes>

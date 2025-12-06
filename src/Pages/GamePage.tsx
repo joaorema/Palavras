@@ -1,6 +1,7 @@
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
 import "../css/GamePage.css";
 import GameCard from "../components/Card";
+import Button1 from "../components/button1";
 
 function GamePage() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function GamePage() {
         </div>
 
         <div className="backbtn-div">
-          <button className="back-btn" onClick={backBtnClick}>Voltar</button>
+          <Button1 href="/home" title="Voltar" ></Button1> 
         </div>
       </div>
     </>
