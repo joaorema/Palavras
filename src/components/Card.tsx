@@ -27,7 +27,7 @@ const GameCard: React.FC<GameProps> = ({
         rounded-2xl overflow-hidden
         transition duration-100 ease-in-out 
         shadow-md hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]
-        w-48 h-56
+        withd-20 height-56
       "
     >
       <div className="w-full flex items-center justify-center text-center text-2xl" style={{ fontSize: "32px", fontWeight: 700, backgroundColor: "#6366f1"}}>

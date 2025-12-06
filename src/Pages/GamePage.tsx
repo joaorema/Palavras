@@ -16,13 +16,13 @@ function GamePage() {
   const Games = [
     {
       title: "Palavras",
-      videoSrc: "../../public/palavrasvideo.webm",
+      videoSrc: "/palavrasvideo.webm",
       //imageSrc: "../../public/PalavrasPhoto.png",
       onClick: () => navigate("/wordle"),
     },
     {
       title: "Conexões",
-      videoSrc: "../../public/conexoesvideo.webm",
+      videoSrc: "/conexoesvideo.webm",
       //imageSrc: "../../public/incoming.png",
       onClick: () => navigate("/conexao"),
     },
