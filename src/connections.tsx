@@ -180,7 +180,7 @@ function ConnectionGame() {
           {remainingWords.map((word, index) => {
             const isSelected = selectedWords.find(w => w.text === word.text);
             return (
-              <div className="map-div" key={index} onClick={() => toggleWord(word)} style={{background: isSelected ? '#1e293b' : '#8f036c',border: isSelected ? '3px solid #fbbf24' : '1px solid #ccc',transform: isSelected ? 'scale(0.95)' : 'scale(1)'}}>
+              <div className="map-div" key={index} onClick={() => toggleWord(word)} style={{background: isSelected ? '#2b5306' : '#4c1d95',border: isSelected ? '3px solid #fbbf24' : '1px solid #ccc',transform: isSelected ? 'scale(0.95)' : 'scale(1)'}}>
                 {word.text}
               </div>
             );

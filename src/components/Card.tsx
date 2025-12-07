@@ -30,9 +30,7 @@ const GameCard: React.FC<GameProps> = ({
         withd-20 height-56
       "
     >
-      <div className="w-full flex items-center justify-center text-center text-2xl" style={{ fontSize: "32px", fontWeight: 700, backgroundColor: "#6366f1"}}>
-        {title}
-      </div>
+      
       <div className="flex-1 w-full overflow-hidden">
         {videoSrc ? (
           <video

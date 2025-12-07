@@ -129,6 +129,7 @@ function WordleGame() {
   useEffect(() => {
     const pickedWord = words[Math.floor(Math.random() * words.length)];
     setTargetWord(pickedWord);
+    console.log(pickedWord);
   }, []);
 
   // Handle keyboard input
@@ -248,11 +249,11 @@ function WordleGame() {
   return (
     <div className="wordle-container">
       <div>
-        <h1>Palavras</h1>
+        <h1 className="font-mono font-bold text-[20px]">Palavras</h1>
       </div>
 
       {/* Game Grid */}
-      <div className="wordle-grid">
+      <div className="wordle-grid font-mono">
         {guesses.map((guess, rowIndex) => (
           <div key={rowIndex} className="wordle-row">
             {Array.from({ length: WORD_LENGTH }).map((_, colIndex) => {
@@ -280,7 +281,7 @@ function WordleGame() {
       </div>
 
       {/* Keyboard */}
-      <div className="wordle-keyboard">
+      <div className="wordle-keyboard font-mono">
         {KEYBOARD_ROWS.map((row, rowIndex) => (
           <div key={rowIndex} className="keyboard-row">
             {row.map((key) => {
