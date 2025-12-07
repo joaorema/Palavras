@@ -1,16 +1,109 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import './css/wordle.css'
+import "./css/wordle.css";
 import { api } from "./api/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 
-
-
-const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];
-const WORD_LENGTH = 5; 
-
+const words = [
+  "FORTE",
+  "PRATO",
+  "LIVRO",
+  "CARRO",
+  "PRAIA",
+  "TRELA",
+  "MIUDA",
+  "BROAS",
+  "CHITA",
+  "SOGRO",
+  "FINTA",
+  "BRUXA",
+  "CANJA",
+  "BANHO",
+  "ROLHA",
+  "NINHO",
+  "MANTA",
+  "GAITA",
+  "XISTO",
+  "MALTA",
+  "VENTO",
+  "CHUVA",
+  "NOITE",
+  "TARDE",
+  "PEDRA",
+  "TERRA",
+  "FLORE",
+  "SERRA",
+  "MONTE",
+  "LAGOA",
+  "LAGOA",
+  "CLARO",
+  "NUVEM",
+  "GRAMA",
+  "AREIA",
+  "PONTE",
+  "PORTA",
+  "CHAVE",
+  "MESA",
+  "GARFO",
+  "JARRA",
+  "BOLSA",
+  "CESTO",
+  "CAIXA",
+  "VIDRO",
+  "PAPEL",
+  "TEXTO",
+  "CARTA",
+  "NAVIO",
+  "TIGRE",
+  "ZEBRA",
+  "COBRA",
+  "PEIXE",
+  "MOSCA",
+  "PULGA",
+  "CISNE",
+  "GRILO",
+  "CARNE",
+  "FRUTA",
+  "VINHO",
+  "LEITE",
+  "TORTA",
+  "PUDIM",
+  "MOLHO",
+  "ARROZ",
+  "MILHO",
+  "TRIGO",
+  "AVEIA",
+  "CALDO",
+  "JOVEM",
+  "VELHO",
+  "PRIMO",
+  "AMIGO",
+  "DENTE",
+  "PERNA",
+  "NARIZ",
+  "BARBA",
+  "OMBRO",
+  "SONHO",
+  "TEMPO",
+  "SORTE",
+  "MORTE",
+  "PODER",
+  "SABER",
+  "FAZER",
+  "DIZER",
+  "ESTAR",
+  "HAVER",
+  "QUASE",
+  "MUITO",
+  "POUCO",
+  "ANTES",
+  "AGORA",
+  "FINAL",
+  "TOTAL",
+];
+const WORD_LENGTH = 5;
 
 const KEYBOARD_ROWS = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -27,16 +120,15 @@ function WordleGame() {
   const [won, setWon] = useState(false);
   const [letterstatus, setLetterStatus] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const backbtn = () => {
-    navigate("/games")
-  }
+    navigate("/games");
+  };
   // Initialize game
   useEffect(() => {
     const pickedWord = words[Math.floor(Math.random() * words.length)];
     setTargetWord(pickedWord);
-    console.log("Word is: ", pickedWord);
   }, []);
 
   // Handle keyboard input
@@ -49,10 +141,10 @@ function WordleGame() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentguess, gameover, targetword]); 
+  }, [currentguess, gameover, targetword]);
 
   const handleKeyPress = (letter) => {
-    if (currentguess.length < WORD_LENGTH) { 
+    if (currentguess.length < WORD_LENGTH) {
       setCurrentGuess(currentguess + letter);
     }
   };
@@ -62,7 +154,8 @@ function WordleGame() {
   };
 
   const handleSubmit = async () => {
-    if (currentguess.length !== WORD_LENGTH) { // ← Use constant
+    if (currentguess.length !== WORD_LENGTH) {
+      // ← Use constant
       alert("Palavra incompleta!");
       return;
     }
@@ -81,14 +174,11 @@ function WordleGame() {
         alert("Parabéns! Você ganhou! ");
       }, 500);
       const user = api.getCurrentUser();
-      if(user)
-      {
-        try{
-          await api.addWin('wordle')
+      if (user) {
+        try {
+          await api.addWin("wordle");
           console.log("added a win to player db");
-        }
-        catch(err)
-        {
+        } catch (err) {
           console.error("failed to register win!", err);
         }
       }
@@ -110,19 +200,22 @@ function WordleGame() {
 
   const updateLetterStatus = (guess) => {
     const newStatus = { ...letterstatus };
-    
+
     for (let i = 0; i < guess.length; i++) {
       const letter = guess[i];
-      
+
       if (targetword[i] === letter) {
         newStatus[letter] = "correct";
-      } else if (targetword.includes(letter) && newStatus[letter] !== "correct") {
+      } else if (
+        targetword.includes(letter) &&
+        newStatus[letter] !== "correct"
+      ) {
         newStatus[letter] = "present";
       } else if (!newStatus[letter]) {
         newStatus[letter] = "absent";
       }
     }
-    
+
     setLetterStatus(newStatus);
   };
 
@@ -148,7 +241,7 @@ function WordleGame() {
     setGameOver(false);
     setWon(false);
     setLetterStatus({});
-    
+
     console.log("New word: ", randomWord);
   };
 
@@ -162,7 +255,8 @@ function WordleGame() {
       <div className="wordle-grid">
         {guesses.map((guess, rowIndex) => (
           <div key={rowIndex} className="wordle-row">
-            {Array.from({ length: WORD_LENGTH }).map((_, colIndex) => { /* ← FIXED HERE */
+            {Array.from({ length: WORD_LENGTH }).map((_, colIndex) => {
+              /* ← FIXED HERE */
               let letter = "";
               if (rowIndex === currentrow) {
                 letter = currentguess[colIndex] || "";
@@ -213,9 +307,19 @@ function WordleGame() {
             })}
           </div>
         ))}
-        <div style={{maxHeight: '600px', padding: '20px', alignItems: 'center', display: 'flex', marginBottom: '20px', justifyContent: 'center', gap: '10px'}}>
-        <Button1 href="/games" title="Voltar"></Button1>
-      </div>
+        <div
+          style={{
+            maxHeight: "600px",
+            padding: "20px",
+            alignItems: "center",
+            display: "flex",
+            marginBottom: "20px",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+        >
+          <Button1 href="/games" title="Voltar"></Button1>
+        </div>
       </div>
 
       {/* Game status */}

@@ -41,7 +41,7 @@ html, body, #root {
     padding: 1rem;
     color: white;
     background: rgba(0, 0, 0, 0.3);
-    background-color: linear-gradient(to bottom right, #4c1d95, #3730a3, #2563eb);
+    background-color: bg1;
     backdrop-filter: blur(6px);
     display: flex;
     align-items: center;

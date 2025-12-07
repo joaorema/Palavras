@@ -11,7 +11,8 @@ const randomIndex = Math.floor(Math.random() * levels.length)
 const connectionPacks = levels[randomIndex]
 
 //shuffle ft
-function shuffle(array) {
+function shuffle(array) 
+{
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -56,7 +57,8 @@ function ConnectionGame() {
     setGameOver(false);                                     
   };
 
-  const toggleWord = (word) => {
+  const toggleWord = (word) => 
+  {
     if (solvedGroups.some(group => group.words.includes(word.text)))    //quick check to avoid using words that already in correct packs 
     {    
       return;
@@ -84,7 +86,8 @@ function ConnectionGame() {
     setMessage("");                                                       
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = () => 
+  {
     if (selectedWords.length !== 4) {                                     //if not selected 4 words
       setMessage("Selecione exatamente 4 palavras!");
       return;
