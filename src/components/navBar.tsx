@@ -24,8 +24,8 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-links" style={{fontSize: "20px", fontWeight: 700 }}>
-        <Link to="/home" className="nav-link">
+      <div className="navbar-links " style={{fontSize: "20px", fontWeight: 700 }}>
+        <Link to="/home" className="nav-link ">
           Home
         </Link>
         {isLoggedIn  && user ? (
@@ -33,7 +33,7 @@ function NavBar() {
             {capitalizeName(user.username)}
           </Link>
         ) : (
-          <Link to="/login" className="nav-link">
+          <Link to="/login" className="nav-link font-mono">
             Login
           </Link>
         )}

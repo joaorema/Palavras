@@ -8,4 +8,5 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: auto; /* ensures it stays at bottom if parent is flex column */
   width: 100%;
+  font: mono;
 }

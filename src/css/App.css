@@ -55,10 +55,12 @@ html, body, #root {
 
   .navbar-links {
     gap: 1rem;
+    font: mono;
   }
 
   .nav-link {
     padding: 0.5rem;
+    font: mono;
   }
   
   .nav-link:hover {

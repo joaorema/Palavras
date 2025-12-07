@@ -58,7 +58,7 @@
   margin-top: 0.8rem;       /* space between buttons */
   border: none;
   border-radius: 0.5rem;
-  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  background: bg-gray-800;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -73,5 +73,5 @@
 
 /* Optional: make Register button visually distinct */
 .login-box > button:last-of-type {
-  background: linear-gradient(135deg, #9333ea, #a855f7);
+  background: bg-gray-800;
 }

@@ -2,6 +2,7 @@ import "../css/login.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { api } from "../api/api";
+import Button2 from "../components/button2";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ function LoginPage() {
   const loginClick = async () => {
     setError("")
     if (!username || !password) {
-      setError("Email or Password missing");
+      setError("Username ou Password em falta");
       return;
     }
     setLoading(true)
@@ -26,7 +27,7 @@ function LoginPage() {
     catch(err)
     {
       console.log("login failed", err);
-      setError("Invalid credentials");
+      setError("Username ou Password invalido");
     }
     finally{
       setLoading(false);
@@ -39,9 +40,9 @@ function LoginPage() {
     <div className="login-container">
       <div className="login-box">
         <div className="register">
-          <h2>Login Page</h2>
+          <h2 className="font-mono">Login</h2>
           {error && <p className="error">{error}</p>}
-          <form>
+          <form className="font-mono">
             <input
               type="text"
               placeholder="Username"
@@ -49,18 +50,19 @@ function LoginPage() {
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </form>
         </div>
-        <button type="submit" onClick={loginClick}>
-          Login
+        <button onClick={loginClick} className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer">
+          <span className="relative">Login</span>
         </button>
-        <button type="submit" onClick={registerClick}>
-          Register
+
+        <button onClick={registerClick} className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer">
+          <span className="relative">Nova Conta</span>
         </button>
       </div>
     </div>

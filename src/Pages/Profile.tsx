@@ -1,7 +1,20 @@
+// @ts-nocheck
 import { api } from "../api/api";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "../css/Profile.css";
+
+const PLACEHOLDERS = [
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Zack",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Robert",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Midnight",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Annie",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Jack",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Bear",
+];
+
 
 function ProfilePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(api.isAuthenticated());
@@ -9,6 +22,8 @@ function ProfilePage() {
   const [gameStats, setGameStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [counter, setCounter] = useState(0)
+  const [photo, setPhoto] = useState(PLACEHOLDERS[counter]);
 
   useEffect(() => {
     const currentUser = api.getCurrentUser();
@@ -33,6 +48,25 @@ function ProfilePage() {
   function capitalizeName(name: string) {
     return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
   }
+  const changePhoto = () =>
+  {
+    if(photo === PLACEHOLDERS[0])
+      setPhoto(PLACEHOLDERS[1]);
+    else if(photo == PLACEHOLDERS[1])
+      setPhoto(PLACEHOLDERS[2]);
+    else if(photo == PLACEHOLDERS[2])
+      setPhoto(PLACEHOLDERS[3]);
+    else if(photo == PLACEHOLDERS[3])
+      setPhoto(PLACEHOLDERS[4]);
+    else if(photo == PLACEHOLDERS[4])
+      setPhoto(PLACEHOLDERS[5]);
+    else if(photo == PLACEHOLDERS[5])
+      setPhoto(PLACEHOLDERS[6]);
+    else if(photo == PLACEHOLDERS[6])
+      setPhoto(PLACEHOLDERS[7]);
+    else
+      setPhoto(PLACEHOLDERS[0]);
+  }
   const currentUser = api.getCurrentUser();
   const handleLogout = () => {
     api.logout();
@@ -43,9 +77,19 @@ function ProfilePage() {
 
   if (!user) return null;
   return (
-    <div className="profile-container">
+    <div className="profile-container font-mono">
       <div className="profile-box">
-        <h2>Profile</h2>
+        <h2>Perfil</h2>
+        <div>
+         <img className="rounded-t-base" src={photo} alt="" />
+          <div className="py-5"></div>
+         <button onClick={changePhoto} className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer">
+          <span className="relative">Trocar Foto</span>
+        </button>
+          </div> 
+          <div className="py-5">
+
+          </div>
         <div className="profile-info">
           <p>
             <strong>Username:</strong> {currentUser.username}
@@ -62,9 +106,6 @@ function ProfilePage() {
             <p>Loading stats...</p>
           ) : gameStats ? (
             <>
-              <p>
-                <strong>Total Wins:</strong> {gameStats.totalWins || 0}
-              </p>
               {gameStats.stats &&
                 gameStats.stats.map((stat) => (
                   <div key={stat.game_type} className="game-type-stats">
@@ -72,8 +113,7 @@ function ProfilePage() {
                       <strong>{capitalizeName(stat.game_type)}:</strong>
                     </p>
                     <ul>
-                      <li>Wins: {stat.wins}</li>
-                      <li>Losses: {stat.losses}</li>
+                      <li>Vitorias: {stat.wins}</li>
                     </ul>
                   </div>
                 ))}

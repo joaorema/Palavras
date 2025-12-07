@@ -42,7 +42,7 @@ function RegisterPage() {
     console.log("coming later!");
   };
   return (
-    <div className="register-container">
+    <div className="register-container font-mono">
       <div className="register-box">
         <div className="register">
           <h2>Register Page</h2>
@@ -55,7 +55,7 @@ function RegisterPage() {
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -68,12 +68,10 @@ function RegisterPage() {
             />
           </form>
         </div>
-        <button type="submit" onClick={handleForm}>
-          Register
+        <button onClick={handleForm} className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer">
+          <span className="relative">Login</span>
         </button>
-        <button type="submit" onClick={GoogleBtn}>
-          Google account
-        </button>
+        
       </div>
     </div>
   );
