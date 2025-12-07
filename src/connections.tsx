@@ -132,38 +132,22 @@ function ConnectionGame() {
   );
 
   return (
-    <div style={{
-      maxWidth: '600px',
-      margin: '0 auto',
-      padding: '20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: '20px'
-      }}>
-        <h1 style={{ margin: 0, fontSize: '2rem', color: "white", display: "flex", alignItems: "center"}}>
+    <div className="first-div">
+      <div className="second-div">
+        <h1 className="game-header">
           Conexões
         </h1>
       </div>
 
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <p style={{ margin: '5px 0', fontWeight: '600' }}>
+      <div className="third-div">
+        <p className="font-mono margin 5px fontweight 600" >
           Encontre grupos de 4 palavras relacionadas
         </p>
-        <p style={{ margin: '5px 0' }}>
+        <p className="margin 10px font-mono">
           Erros: {mistakes}/4
         </p>
         {message && (
-          <p style={{
-            margin: '10px 0',
-            padding: '10px',
-            borderRadius: '8px',
-            background: message.includes('✓') ? '#0dd353ff' : message.includes('✗') ? '#880606ff' : '#0c3e80ff',
-            fontWeight: '600'
-          }}>
+          <p className="msg-div" style={{background: message.includes('✓') ? '#0dd353ff' : message.includes('✗') ? '#880606ff' : '#0c3e80ff',}}>
             {message}
           </p>
         )}
@@ -206,7 +190,7 @@ function ConnectionGame() {
       (
         <div className="multiple-btns">
           <Button2 onClick={handleShuffle} title="Baralhar"></Button2>
-          <Button2 onClick={handleDeselectAll} title="Remover Escolhas"></Button2>
+          <Button2 onClick={handleDeselectAll} title="Remover"></Button2>
           <Button2 onClick={handleSubmit} title="Submeter"></Button2>
         </div>
       )}

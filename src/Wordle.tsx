@@ -5,7 +5,7 @@ import { api } from "./api/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
-import { wordsmap } from "./Pages/palavraslvls.tsx";
+
 
 
 const words = ["FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO", "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA"];

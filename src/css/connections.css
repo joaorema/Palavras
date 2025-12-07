@@ -1,3 +1,4 @@
+/* Base styles */
 .connections-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -16,7 +17,7 @@
 }
 
 .shuffle {
-padding: 0.9rem 5rem;
+  padding: 0.9rem 5rem;
   font-size: 1.1rem;
   font-weight: 600;
   border: none;
@@ -29,7 +30,7 @@ padding: 0.9rem 5rem;
 }
 
 .submit {
-    padding: 0.9rem 5rem;
+  padding: 0.9rem 5rem;
   font-size: 1.1rem;
   font-weight: 600;
   border: none;
@@ -42,9 +43,9 @@ padding: 0.9rem 5rem;
 }
 
 .game-btn {
-    position: center;
-    margin-top: 20px;
-    gap : 12px;
+  position: center;
+  margin-top: 20px;
+  gap: 12px;
 }
 
 .mostbottomdiv {
@@ -57,34 +58,185 @@ padding: 0.9rem 5rem;
   gap: 10px;
 }
 
-.multiple-btns{
+.multiple-btns {
   display: flex;
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0 10px;
 }
 
-.map-div{
+.map-div {
   padding: 20px 16px;
   border-radius: 10px;
   text-align: center;
   font-weight: 600;
   cursor: pointer;
-  color:white;
-  transition: all;
+  color: white;
+  transition: all 0.2s;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.word-grid{
+.word-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-bottom: 20px;
 }
 
-.solved-div{
+.solved-div {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 12px;
   text-align: center;
+}
 
+.msg-div {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.game-header {
+  font-family: monospace;
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.first-div {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: monospace;
+}
+
+.second-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.third-div {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .first-div {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .game-header {
+    font-size: 1.5rem;
+  }
+
+  .word-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .map-div {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+    min-height: 50px;
+    border-radius: 8px;
+  }
+
+  .solved-div {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .multiple-btns {
+    gap: 8px;
+    padding: 0 5px;
+  }
+
+  .shuffle,
+  .submit {
+    padding: 0.7rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  .mostbottomdiv {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .msg-div {
+    margin: 8px;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .first-div {
+    padding: 10px;
+  }
+
+  .game-header {
+    font-size: 1.3rem;
+  }
+
+  .word-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .map-div {
+    padding: 10px 6px;
+    font-size: 0.75rem;
+    min-height: 45px;
+    border-radius: 6px;
+  }
+
+  .solved-div {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .multiple-btns {
+    gap: 6px;
+  }
+
+  .shuffle,
+  .submit {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .third-div p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .map-div {
+    padding: 8px 4px;
+    font-size: 0.7rem;
+    min-height: 40px;
+  }
+
+  .word-grid {
+    gap: 5px;
+  }
+
+  .game-header {
+    font-size: 1.2rem;
+  }
 }
