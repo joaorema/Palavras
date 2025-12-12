@@ -2,25 +2,40 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Prevents the whole page from bouncing/scrolling */
 }
 
-/* App wrapper */
+/* 2. Fix the Container Height */
 .app-container {
-  min-height: 100vh;           /* fill entire viewport */
+  /* Use dvh (dynamic viewport height) to account for mobile address bars */
+  height: 100dvh; 
+  /* Fallback for older browsers */
+  height: 100vh;
+  
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
-/* Main content expands to fill space */
+/* 3. Make the Main Content scroll internally */
 .main-content {
-  flex: 1;                /* Pushes the Footer to the bottom */
-  width: 100%;            /* Ensure it doesn't overflow */
-  max-width: 100vw;       /* Prevent horizontal scroll */
-  padding: 10px;          /* Small padding for mobile phones */
-  box-sizing: border-box; /* Includes padding in width calculation */
-  display: flex;          /* Helps center content */
-  justify-content: center;
+  flex: 1;                 /* Takes up all remaining space */
+  width: 100%;
+  
+  /* IMPORTANT: Allow scrolling only inside this box */
+  overflow-y: auto; 
+  /* Smooth scrolling for iOS */
+  -webkit-overflow-scrolling: touch;
+
+  padding: 10px;
+  box-sizing: border-box;
+  
+  /* Note on Centering: */
+  display: flex;
+  flex-direction: column; /* Usually better for vertical content */
+  align-items: center;    /* Center horizontally */
+  /* justify-content: center;  <-- CAREFUL: If content is tall, this cuts off the top. 
+                                   Better to remove this if pages are long. */
 }
 
 /* Responsive adjustment for larger screens (Tablets/PC) */
