@@ -190,11 +190,8 @@ function ConnectionGame() {
       </div>
 
       <div className="third-div">
-        <p className="font-mono margin 5px fontweight 600" >
-          Encontre grupos de 4 palavras relacionadas
-        </p>
         <p className="margin 10px font-mono">
-          Erros: {mistakes}/4
+          Vidas  {mistakes}/4
         </p>
         {message && (
           <p className="msg-div" style={{background: message.includes('✓') ? '#0dd353ff' : message.includes('✗') ? '#880606ff' : '#0c3e80ff',}}>
