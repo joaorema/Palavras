@@ -10,7 +10,7 @@ function Home() {
 
   return (
     <div className="top-div">
-      <h1 className="font-mono">Jogos</h1>
+      <h1 className="font-mono">Home</h1>
       <Button1 href="/games" title="Jogar">
       </Button1>
     </div>
