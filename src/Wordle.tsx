@@ -103,12 +103,13 @@ const words = [
   "FINAL",
   "TOTAL",
 ];
+
 const WORD_LENGTH = 5;
 
 const KEYBOARD_ROWS = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-  ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "⌫"],
+  ["⌫", "Z", "X", "C", "V", "B", "N", "M", "ENTER"],
 ];
 
 function WordleGame() {
@@ -120,21 +121,25 @@ function WordleGame() {
   const [won, setWon] = useState(false);
   const [letterstatus, setLetterStatus] = useState({});
 
+  const [showInstructions, setShowInstructions] = useState(true);
+
   const navigate = useNavigate();
 
   const backbtn = () => {
     navigate("/games");
   };
-  // Initialize game
+
   useEffect(() => {
     const pickedWord = words[Math.floor(Math.random() * words.length)];
     setTargetWord(pickedWord);
     console.log(pickedWord);
   }, []);
 
-  // Handle keyboard input
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Prevent typing if modal is open
+      if (showInstructions) return;
+
       if (gameover) return;
       if (e.key === "Enter") handleSubmit();
       else if (e.key === "Backspace") handleDelete();
@@ -142,7 +147,7 @@ function WordleGame() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentguess, gameover, targetword]);
+  }, [currentguess, gameover, targetword, showInstructions]); // Added showInstructions to dependencies
 
   const handleKeyPress = (letter) => {
     if (currentguess.length < WORD_LENGTH) {
@@ -156,7 +161,6 @@ function WordleGame() {
 
   const handleSubmit = async () => {
     if (currentguess.length !== WORD_LENGTH) {
-      // ← Use constant
       alert("Palavra incompleta!");
       return;
     }
@@ -167,7 +171,6 @@ function WordleGame() {
 
     updateLetterStatus(currentguess);
 
-    // Check for win
     if (currentguess === targetword) {
       setWon(true);
       setGameOver(true);
@@ -186,7 +189,6 @@ function WordleGame() {
       return;
     }
 
-    // Check for loss
     if (currentrow === 5) {
       setGameOver(true);
       setTimeout(() => {
@@ -201,10 +203,8 @@ function WordleGame() {
 
   const updateLetterStatus = (guess) => {
     const newStatus = { ...letterstatus };
-
     for (let i = 0; i < guess.length; i++) {
       const letter = guess[i];
-
       if (targetword[i] === letter) {
         newStatus[letter] = "correct";
       } else if (
@@ -216,13 +216,11 @@ function WordleGame() {
         newStatus[letter] = "absent";
       }
     }
-
     setLetterStatus(newStatus);
   };
 
   const getCellStatus = (rowIndex, colIndex) => {
     const guess = guesses[rowIndex];
-
     if (!guess || guess.length <= colIndex) return "";
     if (rowIndex > currentrow) return "";
     if (rowIndex === currentrow && !gameover) return "";
@@ -233,31 +231,79 @@ function WordleGame() {
     else return "absent";
   };
 
-  const resetGame = () => {
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-    setTargetWord(randomWord);
-    setGuesses(Array(6).fill(""));
-    setCurrentGuess("");
-    setCurrentRow(0);
-    setGameOver(false);
-    setWon(false);
-    setLetterStatus({});
-
-    console.log("New word: ", randomWord);
-  };
-
   return (
-    <div className="wordle-container">
+    <div className="wordle-container relative">
+      {showInstructions && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm">
+          <div className="w-[90%] max-w-md rounded-xl border border-gray-700 bg-[#121213] p-6 text-white shadow-2xl">
+            {/* Modal Header */}
+            <h2 className="mb-4 border-b border-gray-700 pb-2 text-xl font-bold text-center font-mono">
+              Instruções
+            </h2>
+
+            <p className="mb-4 text-sm text-gray-300 text-center font-mono">
+              Adivinha a palavra em 6 tentativas
+            </p>
+
+            {/* Examples List */}
+            <ul className="font-mono space-y-3">
+              <li className="flex items-center gap-3">
+                <div className=" flex h-10 w-10 items-center justify-center bg-[#538d4e] text-lg font-bold text-white border border-gray-600">
+                  P
+                </div>
+                <span className="text-sm font-mono">
+                  Letra <span className="font-bold">certa</span> no lugar certo.
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center bg-[#b59f3b] text-lg font-bold text-white border border-gray-600">
+                  L
+                </div>
+                <span className="text-sm">
+                  Letra <span className="font-bold">certa</span> no lugar
+                  errado.
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center bg-[#3a3a3c] text-lg font-bold text-white border border-gray-600">
+                  A
+                </div>
+                <span className="text-sm">
+                  Letra <span className="font-bold">não existe</span> na
+                  palavra.
+                </span>
+              </li>
+            </ul>
+
+            {/* Close Button */}
+            <div className="mt-6 flex justify-center">
+              <Button2
+                title="Começar"
+                onClick={() => setShowInstructions(false)}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={() => setShowInstructions(true)}
+        className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-gray-500 text-gray-300 transition hover:bg-gray-800 hover:text-white"
+        title="Ver instruções"
+      >
+        ?
+      </button>
+
+      {/* --- GAME HEADER --- */}
       <div>
         <h1 className="font-mono font-bold text-[20px]">Palavras</h1>
       </div>
 
-      {/* Game Grid */}
+      {/* --- GAME GRID --- */}
       <div className="wordle-grid font-mono">
         {guesses.map((guess, rowIndex) => (
           <div key={rowIndex} className="wordle-row">
             {Array.from({ length: WORD_LENGTH }).map((_, colIndex) => {
-              /* ← FIXED HERE */
               let letter = "";
               if (rowIndex === currentrow) {
                 letter = currentguess[colIndex] || "";
@@ -280,7 +326,7 @@ function WordleGame() {
         ))}
       </div>
 
-      {/* Keyboard */}
+      {/* --- KEYBOARD --- */}
       <div className="wordle-keyboard font-mono">
         {KEYBOARD_ROWS.map((row, rowIndex) => (
           <div key={rowIndex} className="keyboard-row">
@@ -323,7 +369,7 @@ function WordleGame() {
         </div>
       </div>
 
-      {/* Game status */}
+      {/* --- GAME STATUS --- */}
       {gameover && (
         <div className="game-status">
           {won ? "🎉 Você venceu!" : `😢 A palavra era: ${targetword}`}

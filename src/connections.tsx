@@ -28,7 +28,8 @@ function ConnectionGame() {
   const [mistakes, setMistakes] = useState(0);              //nbr of trys (starts at 0)
   const [message, setMessage] = useState("");               //incorrect or correct msg
   const [gameOver, setGameOver] = useState(false);
-  
+  const [showInstructions, setShowInstructions] = useState(true);
+
   const navigate = useNavigate();
   const backBtn = () => {
     navigate("/games")
@@ -41,6 +42,7 @@ function ConnectionGame() {
   const initializeGame = () => 
   {
     const randomLvlIndex = Math.floor(Math.random() * levels.length)
+  
     
     const flatWords = connectionPacks.flatMap(pack =>       //breaks the array into 16 individual objects (text:limao , category : sabores de gelado, color)
       pack.words.map(word => ({                             //
@@ -135,7 +137,52 @@ function ConnectionGame() {
   );
 
   return (
-    <div className="first-div">
+  
+    <div className="first-div relative"> 
+
+     
+      {showInstructions && (
+        <div className="font-mono fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm">
+          <div className="w-[90%] max-w-md rounded-xl border border-gray-700 bg-[#121213] p-6 text-white shadow-2xl">
+            
+            <h2 className="font-mono text-center mb-4 border-b border-gray-700 pb-2 text-xl font-bold">
+              Instruções
+            </h2>
+            
+            <p className="font-mono mb-4 text-sm text-gray-300">
+              Encontre grupos de quatro palavras que partilhem algo em comum.
+            </p>
+
+            <ul className="font-mono list-disc space-y-3 pl-5 text-sm text-gray-300 mb-6">
+              <li className="font-mono">
+                Selecione 4 palavras
+              </li>
+              <li>
+                Carregar em <span className="font-bold text-white">Submeter</span>
+              </li>
+              
+              <li>
+                Exemplos de categorias: <br/>
+                <span className="text-xs italic text-gray-400">"BALEIA, CÃO, CAVALO, TIGRE" (Animais)</span>
+              </li>
+            </ul>
+
+            <div className="flex justify-center">
+              <Button2 title="Começar" onClick={() => setShowInstructions(false)} />
+            </div>
+          </div>
+        </div>
+      )}
+
+   
+      <button 
+        onClick={() => setShowInstructions(true)}
+        className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-gray-500 text-gray-300 transition hover:bg-gray-800 hover:text-white"
+        title="Ver instruções"
+      >
+        ?
+      </button>
+
       <div className="second-div">
         <h1 className="game-header">
           Conexões
