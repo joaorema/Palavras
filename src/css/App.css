@@ -1,41 +1,37 @@
+/* Lock the browser window so the whole page doesn't bounce */
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevents the whole page from bouncing/scrolling */
+  overflow: hidden; /* IMPORTANT: Disables body scroll */
 }
 
-/* 2. Fix the Container Height */
 .app-container {
-  /* Use dvh (dynamic viewport height) to account for mobile address bars */
+  /* Use dvh for mobile address bar support, fall back to vh */
   height: 100dvh; 
-  /* Fallback for older browsers */
-  height: 100vh;
+  height: 100vh; /* Fallback for older browsers */
   
-  width: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  background-color: var(--bg1); /* Ensure your bg color is here */
 }
 
-/* 3. Make the Main Content scroll internally */
 .main-content {
-  flex: 1;                 /* Takes up all remaining space */
+  flex: 1;                /* Take all available space between header/footer */
   width: 100%;
   
-  /* IMPORTANT: Allow scrolling only inside this box */
-  overflow-y: auto; 
-  /* Smooth scrolling for iOS */
-  -webkit-overflow-scrolling: touch;
-
+  /* THIS IS THE KEY FIX: */
+  overflow-y: auto;       /* Enables scrollbar only inside this div */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iPhone */
+  
   padding: 10px;
   box-sizing: border-box;
-  
-  /* Note on Centering: */
   display: flex;
-  flex-direction: column; /* Usually better for vertical content */
-  align-items: center;    /* Center horizontally */
-  /* justify-content: center;  <-- CAREFUL: If content is tall, this cuts off the top. 
-                                   Better to remove this if pages are long. */
+  
+  /* Be careful with centering if content is long! */
+  flex-direction: column; 
+  align-items: center; 
 }
 
 /* Responsive adjustment for larger screens (Tablets/PC) */

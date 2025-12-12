@@ -1,4 +1,7 @@
 .footer-bar {
+  /* Prevent the footer from shrinking if content is huge */
+  flex-shrink: 0; 
+  
   text-align: center;
   padding: 1rem;
   color: #fff;
@@ -6,7 +9,9 @@
   backdrop-filter: blur(6px);
   font-size: 0.9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  margin-top: auto; /* ensures it stays at bottom if parent is flex column */
   width: 100%;
-  font: mono;
+  font-family: monospace; /* 'font: mono' is sometimes invalid, use font-family */
+  
+  /* You can remove margin-top: auto because the parent flex handles positioning now */
+  /* margin-top: auto; */ 
 }
