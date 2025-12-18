@@ -45,7 +45,6 @@ const words = [
   "PONTE",
   "PORTA",
   "CHAVE",
-  "MESA",
   "GARFO",
   "JARRA",
   "BOLSA",
