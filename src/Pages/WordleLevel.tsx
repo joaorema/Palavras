@@ -23,12 +23,11 @@ export default function WordleLevelPage() {
   };
 
   return (
-    <div className="min-h-screen p-9 flex flex-col items-center bg-bg2 font-mono">
-      <h1 className="text-4xl font-extrabold text-white mb-10 tracking-tight drop-shadow-lg">
+    <div className="min-h-screen flex flex-col items-center bg-bg2 font-mono p-4 md:p-9">
+      <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6 md:mb-10 tracking-tight drop-shadow-lg text-center">
         Select Level
       </h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full max-w-5xl">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 w-full max-w-5xl">
         {levels.map((level) => (
           <button
             key={level}
@@ -36,22 +35,26 @@ export default function WordleLevelPage() {
             className="
               group
               relative
-              h-20
               w-full
-              flex items-center justify-center /* Centered text looks better with this effect */
-              px-8
-              overflow-hidden /* Vital: Keeps the green circle inside the button */
+              flex items-center justify-center
               
-              /* GLASSMORPHISM STYLES */
+              /* RESPONSIVE HEIGHT: Shorter on mobile (h-16), Taller on PC (h-20) */
+              h-16 md:h-20
+              
+              px-4 md:px-8
+              overflow-hidden
+              
+              /* GLASSMORPHISM */
               bg-white/10
               backdrop-blur-sm
               border-2 
               border-white/10
               
-              rounded-lg
+              /* CORNERS: slightly smaller radius on mobile looks sharper */
+              rounded-2xl md:rounded-3xl
               shadow-lg
               
-              /* HOVER & TRANSITIONS */
+              /* ANIMATIONS */
               transition-all duration-300 ease-out
               hover:border-green-400
               hover:shadow-green-500/20
@@ -60,7 +63,7 @@ export default function WordleLevelPage() {
               active:scale-95
             "
           >
-          
+            {/* Green Fill Effect */}
             <span className="
               absolute 
               top-1/2 left-1/2 
@@ -72,15 +75,15 @@ export default function WordleLevelPage() {
               group-hover:w-96 group-hover:h-96
             "></span>
 
-          
-            <span className="relative z-10 text-xl font-bold text-gray-200 group-hover:text-white transition-colors">
+            {/* Text: Slightly smaller on mobile */}
+            <span className="relative z-10 text-lg md:text-xl font-bold text-gray-200 group-hover:text-white transition-colors">
               Level {level}
             </span>
           </button>
         ))}
       </div>
 
-      <div className="mt-12">
+      <div className="mt-8 md:mt-12 mb-8">
         <Button1 href="/games" title="Voltar" />
       </div>
     </div>
