@@ -19,7 +19,7 @@ function GamePage() {
       title: "Palavras",
       videoSrc: "/palavrasvideo.webm",
       //imageSrc: "../../public/PalavrasPhoto.png",
-      onClick: () => navigate("/wordle"),
+      onClick: () => navigate("/wordlelevel"),
     },
     {
       title: "Conexões",

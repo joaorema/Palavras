@@ -2,106 +2,11 @@
 import { useState, useEffect } from "react";
 import "./css/wordle.css";
 import { api } from "./api/api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 
-const words = [
-  "FORTE",
-  "PRATO",
-  "LIVRO",
-  "CARRO",
-  "PRAIA",
-  "TRELA",
-  "MIUDA",
-  "BROAS",
-  "CHITA",
-  "SOGRO",
-  "FINTA",
-  "BRUXA",
-  "CANJA",
-  "BANHO",
-  "ROLHA",
-  "NINHO",
-  "MANTA",
-  "GAITA",
-  "XISTO",
-  "MALTA",
-  "VENTO",
-  "CHUVA",
-  "NOITE",
-  "TARDE",
-  "PEDRA",
-  "TERRA",
-  "FLORE",
-  "SERRA",
-  "MONTE",
-  "LAGOA",
-  "LAGOA",
-  "CLARO",
-  "NUVEM",
-  "GRAMA",
-  "AREIA",
-  "PONTE",
-  "PORTA",
-  "CHAVE",
-  "GARFO",
-  "JARRA",
-  "BOLSA",
-  "CESTO",
-  "CAIXA",
-  "VIDRO",
-  "PAPEL",
-  "TEXTO",
-  "CARTA",
-  "NAVIO",
-  "TIGRE",
-  "ZEBRA",
-  "COBRA",
-  "PEIXE",
-  "MOSCA",
-  "PULGA",
-  "CISNE",
-  "GRILO",
-  "CARNE",
-  "FRUTA",
-  "VINHO",
-  "LEITE",
-  "TORTA",
-  "PUDIM",
-  "MOLHO",
-  "ARROZ",
-  "MILHO",
-  "TRIGO",
-  "AVEIA",
-  "CALDO",
-  "JOVEM",
-  "VELHO",
-  "PRIMO",
-  "AMIGO",
-  "DENTE",
-  "PERNA",
-  "NARIZ",
-  "BARBA",
-  "OMBRO",
-  "SONHO",
-  "TEMPO",
-  "SORTE",
-  "MORTE",
-  "PODER",
-  "SABER",
-  "FAZER",
-  "DIZER",
-  "ESTAR",
-  "HAVER",
-  "QUASE",
-  "MUITO",
-  "POUCO",
-  "ANTES",
-  "AGORA",
-  "FINAL",
-  "TOTAL",
-];
+
 
 const WORD_LENGTH = 5;
 
@@ -112,6 +17,9 @@ const KEYBOARD_ROWS = [
 ];
 
 function WordleGame() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [targetword, setTargetWord] = useState("");
   const [guesses, setGuesses] = useState(Array(6).fill(""));
   const [currentguess, setCurrentGuess] = useState("");
@@ -119,26 +27,35 @@ function WordleGame() {
   const [gameover, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
   const [letterstatus, setLetterStatus] = useState({});
-
   const [showInstructions, setShowInstructions] = useState(true);
 
-  const navigate = useNavigate();
-
-  const backbtn = () => {
-    navigate("/games");
-  };
-
+ 
   useEffect(() => {
-    const pickedWord = words[Math.floor(Math.random() * words.length)];
-    setTargetWord(pickedWord);
-    console.log(pickedWord);
-  }, []);
+    let newWord = "";
 
+    if (location.state && location.state.targetWord) {
+      newWord = location.state.targetWord;
+      console.log("Playing Level Word:", newWord);
+    } else {
+      console.error("failed to load level(word)");
+      return;
+    }
+
+   
+    setTargetWord(newWord);
+    setGuesses(Array(6).fill("")); 
+    setCurrentGuess(""); 
+    setCurrentRow(0); 
+    setGameOver(false); 
+    setWon(false); 
+    setLetterStatus({}); 
+
+  }, [location.state]);
+
+ 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Prevent typing if modal is open
       if (showInstructions) return;
-
       if (gameover) return;
       if (e.key === "Enter") handleSubmit();
       else if (e.key === "Backspace") handleDelete();
@@ -146,7 +63,7 @@ function WordleGame() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentguess, gameover, targetword, showInstructions]); // Added showInstructions to dependencies
+  }, [currentguess, gameover, targetword, showInstructions]);
 
   const handleKeyPress = (letter) => {
     if (currentguess.length < WORD_LENGTH) {
@@ -176,6 +93,7 @@ function WordleGame() {
       setTimeout(() => {
         alert("Parabéns! Você ganhou! ");
       }, 500);
+
       const user = api.getCurrentUser();
       if (user) {
         try {
@@ -220,31 +138,40 @@ function WordleGame() {
 
   const getCellStatus = (rowIndex, colIndex) => {
     const guess = guesses[rowIndex];
-    if (!guess || guess.length <= colIndex) return "";
-    if (rowIndex > currentrow) return "";
-    if (rowIndex === currentrow && !gameover) return "";
+    if (!guess || guess.length <= colIndex) 
+      return "";
+    if (rowIndex > currentrow) 
+      return "";
+    if (rowIndex === currentrow && !gameover) 
+      return "";
 
     const letter = guess[colIndex];
-    if (targetword[colIndex] === letter) return "correct";
-    else if (targetword.includes(letter)) return "present";
-    else return "absent";
+    if (targetword[colIndex] === letter) 
+      return "correct";
+    else if (targetword.includes(letter)) 
+      return "present";
+    else 
+      return "absent";
   };
 
   return (
     <div className="wordle-container relative">
+      {/* Level Indicator */}
+      {location.state?.levelNumber && (
+        <div className="absolute top-4 left-4 text-white font-mono text-sm opacity-50">
+          Level {location.state.levelNumber}
+        </div>
+      )}
+
       {showInstructions && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm">
           <div className="w-[90%] max-w-md rounded-xl border border-gray-700 bg-[#121213] p-6 text-white shadow-2xl">
-            {/* Modal Header */}
             <h2 className="mb-4 border-b border-gray-700 pb-2 text-xl font-bold text-center font-mono">
               Instruções
             </h2>
-
             <p className="mb-4 text-sm text-gray-300 text-center font-mono">
               Adivinha a palavra em 6 tentativas
             </p>
-
-            {/* Examples List */}
             <ul className="font-mono space-y-3">
               <li className="flex items-center gap-3">
                 <div className=" flex h-10 w-10 items-center justify-center bg-[#538d4e] text-lg font-bold text-white border border-gray-600">
@@ -273,8 +200,6 @@ function WordleGame() {
                 </span>
               </li>
             </ul>
-
-            {/* Close Button */}
             <div className="mt-6 flex justify-center">
               <Button2
                 title="Começar"
@@ -293,12 +218,10 @@ function WordleGame() {
         ?
       </button>
 
-      {/* --- GAME HEADER --- */}
       <div>
         <h1 className="font-mono font-bold text-[20px]">Palavras</h1>
       </div>
 
-      {/* --- GAME GRID --- */}
       <div className="wordle-grid font-mono">
         {guesses.map((guess, rowIndex) => (
           <div key={rowIndex} className="wordle-row">
@@ -325,7 +248,6 @@ function WordleGame() {
         ))}
       </div>
 
-      {/* --- KEYBOARD --- */}
       <div className="wordle-keyboard font-mono">
         {KEYBOARD_ROWS.map((row, rowIndex) => (
           <div key={rowIndex} className="keyboard-row">
@@ -364,14 +286,13 @@ function WordleGame() {
             gap: "10px",
           }}
         >
-          <Button1 href="/games" title="Voltar"></Button1>
+          <Button1 href="/wordlelevel" title="Voltar"></Button1>
         </div>
       </div>
 
-      {/* --- GAME STATUS --- */}
       {gameover && (
         <div className="game-status">
-          {won ? "🎉 Você venceu!" : `😢 A palavra era: ${targetword}`}
+          {won ? " Ganhaste!" : `A palavra era: ${targetword}`}
         </div>
       )}
     </div>
