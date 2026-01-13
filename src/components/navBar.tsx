@@ -1,39 +1,51 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { api } from "../api/api";
+import { supabase } from "../supabaseClient"; // Certifique-se de importar o client
 
 function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(api.isAuthenticated());
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  //check login status
-  useEffect(() => {
-    // In case localStorage changes externally (e.g. after login)
-    const handleStorageChange = () => {
-      setIsLoggedIn(api.isAuthenticated());
-    };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+  useEffect(() => {
+    // 1. Checar sessão atual assim que o componente carrega
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // 2. Ouvir mudanças no estado de autenticação (Login/Logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Limpar o listener quando o componente for destruído
+    return () => subscription.unsubscribe();
   }, []);
-  function capitalizeName(name: string) {
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
+  function capitalizeName(name) {
     return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
   }
-  const user = api.getCurrentUser();
- 
+
+  // O username que salvamos no registro está em user_metadata
+  const displayName = user?.user_metadata?.display_name || user?.email;
 
   return (
     <nav className="navbar">
-      <div className="navbar-links " style={{fontSize: "20px", fontWeight: 700 }}>
-        <Link to="/home" className="nav-link ">
+      <div className="navbar-links" style={{ fontSize: "20px", fontWeight: 700 }}>
+        <Link to="/home" className="nav-link">
           Home
         </Link>
-        {isLoggedIn  && user ? (
-          <Link to="/profile" className="nav-link-2">
-            {capitalizeName(user.username)}
-          </Link>
+        
+        {user ? (
+            <Link to="/home" className="nav-link" onClick={handleLogout}>
+              Logout
+            </Link>
+          
         ) : (
-          <Link to="/login" className="nav-link font-mono">
+          <Link to="/login" className="nav-link font-mono" >
             Login
           </Link>
         )}
@@ -41,4 +53,5 @@ function NavBar() {
     </nav>
   );
 }
+
 export default NavBar;
