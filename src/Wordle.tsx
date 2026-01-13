@@ -5,6 +5,7 @@ import { api } from "./api/api";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
+import { supabase } from "./supabaseClient";
 
 
 
@@ -76,42 +77,53 @@ function WordleGame() {
   };
 
   const handleSubmit = async () => {
-    if (currentguess.length !== WORD_LENGTH) {
-      alert("Palavra incompleta!");
-      return;
-    }
+  if (currentguess.length !== WORD_LENGTH) {
+    alert("Palavra incompleta!");
+    return;
+  }
 
-    const newGuess = [...guesses];
-    newGuess[currentrow] = currentguess;
-    setGuesses(newGuess);
+  const newGuess = [...guesses];
+  newGuess[currentrow] = currentguess;
+  setGuesses(newGuess);
 
-    updateLetterStatus(currentguess);
+  updateLetterStatus(currentguess);
 
-    if (currentguess === targetword) {
-      setWon(true);
-      setGameOver(true);
-      setTimeout(() => {
-        alert("Parabéns! Você ganhou! ");
-      }, 500);
+  // --- LÓGICA DE VITÓRIA ---
+  if (currentguess === targetword) {
+    setWon(true);
+    setGameOver(true);
 
-      const user = api.getCurrentUser();
-      if (user) {
+    // 1. Pegar o usuário logado
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (user) {
+      const levelNum = location.state?.levelNumber;
+
+      if (levelNum) {
         try {
-          await api.addWin("wordle");
-          console.log("added a win to player db");
+          // 2. Salvar na tabela player_progress
+          const { error } = await supabase
+            .from('player_progress')
+            .upsert({ 
+              user_id: user.id, 
+              level_number: levelNum 
+            }, { 
+              onConflict: 'user_id, level_number' // Evita duplicatas
+            });
+
+          if (error) throw error;
+          console.log(`Nível ${levelNum} registrado com sucesso!`);
         } catch (err) {
-          console.error("failed to register win!", err);
+          console.error("Erro ao salvar progresso:", err.message);
         }
       }
-      return;
     }
 
-    if (currentrow === 5) {
-      setGameOver(true);
-      setTimeout(() => {
-        alert(`Fim de jogo! A palavra era: ${targetword}`);
-      }, 500);
-      return;
+    setTimeout(() => {
+      alert("Parabéns! Você ganhou! 🏆");
+    }, 500);
+    return;
+  
     }
 
     setCurrentRow(currentrow + 1);
