@@ -118,14 +118,19 @@ function WordleGame() {
         }
       }
     }
-
     setTimeout(() => {
       alert("Parabéns! Você ganhou! 🏆");
     }, 500);
     return;
   
     }
-
+    if (currentrow === 5) {
+      setGameOver(true);
+      setTimeout(() => {
+        alert(`Fim de jogo! A palavra era: ${targetword}`);
+      }, 500);
+      return;
+    }
     setCurrentRow(currentrow + 1);
     setCurrentGuess("");
   };
