@@ -119,7 +119,7 @@ function WordleGame() {
       }
     }
     setTimeout(() => {
-      alert("Parabéns! Você ganhou! 🏆");
+      alert("Parabéns!");
     }, 500);
     return;
   
@@ -127,7 +127,7 @@ function WordleGame() {
     if (currentrow === 5) {
       setGameOver(true);
       setTimeout(() => {
-        alert(`Fim de jogo! A palavra era: ${targetword}`);
+        alert("Perdeste");
       }, 500);
       return;
     }
