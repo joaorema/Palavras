@@ -14,7 +14,7 @@ export default function WordleLevelPage() {
   const [completedLevels, setCompletedLevels] = useState([]); // Array de números [1, 5, 8]
   const [loading, setLoading] = useState(true);
 
-  const levels = Array.from({ length: 15 }, (_, i) => i + 1);
+  const levels = Array.from({ length: 30 }, (_, i) => i + 1);
 
   // Buscar progresso do banco de dados
   useEffect(() => {
