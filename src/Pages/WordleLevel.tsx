@@ -54,6 +54,15 @@ export default function WordleLevelPage() {
     });
   };
 
+  if (loading) 
+  {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono">
+        <div className="text-white text-xl animate-pulse">Loading Levels...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-bg2 font-mono p-4 md:p-9">
       <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6 md:mb-10 tracking-tight drop-shadow-lg text-center">
