@@ -16,6 +16,7 @@ import WordleGame from './Wordle'
 import ProfilePage from './Pages/Profile'
 import ConnectionGame from './connections'
 import WordleLevelPage from './Pages/WordleLevel'
+import ConnectionLevelPage from './Pages/ConnetionLevel'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/wordle" element={<WordleGame />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="connectionlevel" element={<ConnectionLevelPage />} />
         </Routes>
       </main>
       <Footer />

@@ -25,7 +25,7 @@ function GamePage() {
       title: "Conexões",
       videoSrc: "/conexoesvideo.webm",
       //imageSrc: "../../public/incoming.png",
-      onClick: () => navigate("/conexao"),
+      onClick: () => navigate("/connectionlevel"),
     },
   ];
 
