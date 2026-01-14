@@ -28,7 +28,8 @@ export default function WordleLevelPage() {
             .select('level_number')
             .eq('user_id', user.id);
 
-          if (error) throw error;
+          if (error) 
+            throw error;
 
           // Transformar [{level_number: 1}, {level_number: 2}] em [1, 2]
           const done = data.map(item => item.level_number);
@@ -78,7 +79,7 @@ export default function WordleLevelPage() {
               key={level}
               onClick={() => handleLevelClick(level)}
               className={`
-                group relative w-full flex items-center justify-center h-16 md:h-20 px-4 md:px-8 overflow-hidden backdrop-blur-sm border-2 rounded-2xl md:rounded-3xl shadow-lg transition-all duration-300 ease-out active:scale-95
+                group relative w-full flex items-center justify-center h-16 md:h-20 px-4 md:px-8 overflow-hidden border-2 rounded-2xl md:rounded-3xl shadow-lg transition-all duration-300 ease-out active:scale-95
                 ${isDone 
                   ? "bg-green-500/20 border-green-500 shadow-green-500/10" 
                   : "bg-white/10 border-white/10 hover:border-green-400 hover:-translate-y-1"
