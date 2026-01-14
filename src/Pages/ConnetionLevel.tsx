@@ -48,7 +48,7 @@ export default function ConnectionLevelPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono text-white">
-        <div className="animate-pulse">Carregando Níveis...</div>
+        <div className="animate-pulse">Loading...</div>
       </div>
     );
   }

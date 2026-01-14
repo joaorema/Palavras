@@ -149,7 +149,7 @@ export default function ConnectionGame() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono text-white">
-        <div className="text-xl animate-bounce">Carregando Jogo...</div>
+        <div className="text-xl animate-bounce">Loading...</div>
       </div>
     );
   }

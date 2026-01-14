@@ -4,9 +4,21 @@ import Button1 from "../components/button1";
 import { supabase } from "../supabaseClient"; // Certifique-se de importar o client
 
 const WORDS_LIST = [
-  "FORTE", "PRATO", "LIVRO", "CARRO", "PRAIA", "TRELA", "MIUDA", "BROAS", "CHITA", "SOGRO",
-  "FINTA", "BRUXA", "CANJA", "BANHO", "ROLHA", "NINHO", "MANTA", "GAITA", "XISTO", "MALTA",
-  "VENTO", "CHUVA", "NOITE", "TARDE", "PEDRA", "TERRA", "FLORE", "SERRA", "MONTE", "LAGOA",
+  // --- FÁCEIS ---
+  "FORTE", "PRATO", "LIVRO", "PRAIA", "MANTA", 
+  "VENTO", "NOITE", "TARDE", "PEDRA", "MONTE", 
+  "LAGOA", "MALTA", "PORTA", "GENTE", "FESTA", 
+  "MUNDO", "SABER", "LUGAR", "PONTE", "GRADE",
+  
+  // --- MÉDIAS ---
+  "TRELA", "SOGRO", "FINTA", "CANJA", "BANHO", 
+  "NINHO", "CHUVA", "BROAS", "MIUDA", "FLORA", 
+  "SONHO", "MILHO", "COBRA", "TRUTA", "JOVEM",
+  
+  // --- DIFÍCEIS ---
+  "BRUXA", "ROLHA", "GAITA", "XISTO", "CARRO", 
+  "CHITA", "TERRA", "SERRA", "PEIXE", "ZEBRA", 
+  "BAIXO", "JUSTO", "ARROZ", "CAIXA", "QUASE"
 ];
 
 export default function WordleLevelPage() {
@@ -14,7 +26,7 @@ export default function WordleLevelPage() {
   const [completedLevels, setCompletedLevels] = useState([]); // Array de números [1, 5, 8]
   const [loading, setLoading] = useState(true);
 
-  const levels = Array.from({ length: 30 }, (_, i) => i + 1);
+  const levels = Array.from({ length: 50 }, (_, i) => i + 1);
 
   // Buscar progresso do banco de dados
   useEffect(() => {
@@ -59,7 +71,7 @@ export default function WordleLevelPage() {
   {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono">
-        <div className="text-white text-xl animate-pulse">Loading Levels...</div>
+        <div className="text-white text-xl animate-pulse">Loading...</div>
       </div>
     );
   }
