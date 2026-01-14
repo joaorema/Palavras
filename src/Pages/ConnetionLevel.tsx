@@ -56,7 +56,7 @@ export default function ConnectionLevelPage() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-bg2 font-mono p-4 md:p-9">
       <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6 md:mb-10 text-center">
-        Conexões: Níveis
+        Seleção de Nível
       </h1>
       
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 w-full max-w-5xl">

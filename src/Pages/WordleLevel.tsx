@@ -79,7 +79,7 @@ export default function WordleLevelPage() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-bg2 font-mono p-4 md:p-9">
       <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6 md:mb-10 tracking-tight drop-shadow-lg text-center">
-        Select Level
+        Seleção de Nível
       </h1>
       
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 w-full max-w-5xl">
@@ -104,7 +104,7 @@ export default function WordleLevelPage() {
               <span className={`relative z-10 text-lg md:text-xl font-bold transition-colors flex items-center gap-2
                 ${isDone ? "text-green-400" : "text-gray-200 group-hover:text-white"}`}
               >
-                Level {level}
+                Nível {level}
                 {isDone && <span>✓</span>} 
               </span>
             </button>
