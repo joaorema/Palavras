@@ -10,12 +10,14 @@
 /* Buttons section */
 .button-div {
   display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to next line if screen is too narrow */
   justify-content: center;
   align-items: center;
-  gap: 4rem;
-  background: transparent;
-  font-size: 24px;
-  font-weight: bold;
+  gap: 2rem;       /* Reduced gap slightly for better fit */
+  width: 100%;
+  max-width: 1200px; /* This prevents the cards from spreading too far on huge screens */
+  margin: 0 auto;    /* Centers the container */
+  padding: 20px;
 }
 
 /* Back button section */
