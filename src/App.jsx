@@ -33,7 +33,7 @@ function App() {
           <Route path="/wordlelevel" element={<WordleLevelPage></WordleLevelPage>} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/wordle" element={<WordleGame />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/perfil" element={<ProfilePage />} />
           <Route path="connectionlevel" element={<ConnectionLevelPage />} />
         </Routes>
       </main>

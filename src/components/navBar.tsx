@@ -6,6 +6,7 @@ function NavBar() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     // 1. Checar sessão atual assim que o componente carrega
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -36,14 +37,18 @@ function NavBar() {
     <nav className="navbar">
       <div className="navbar-links" style={{ fontSize: "20px", fontWeight: 700 }}>
         <Link to="/home" className="nav-link">
-          Home
+          Palavras | Conexões
         </Link>
         
         {user ? (
+            <>
+            <Link to="/perfil" className="nav-link">
+              Perfil
+            </Link>
             <Link to="/home" className="nav-link" onClick={handleLogout}>
               Logout
             </Link>
-          
+            </>
         ) : (
           <Link to="/login" className="nav-link font-mono" >
             Login

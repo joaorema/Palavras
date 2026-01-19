@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button1 from "../components/button1";
-import { supabase } from "../supabaseClient"; // Certifique-se de importar o client
+import { supabase } from "../supabaseClient";
 
 const WORDS_LIST = [
   // --- FÁCEIS ---
@@ -23,7 +23,7 @@ const WORDS_LIST = [
 
 export default function WordleLevelPage() {
   const navigate = useNavigate();
-  const [completedLevels, setCompletedLevels] = useState([]); // Array de números [1, 5, 8]
+  const [completedLevels, setCompletedLevels] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const levels = Array.from({ length: 50 }, (_, i) => i + 1);
