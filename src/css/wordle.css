@@ -1,5 +1,6 @@
 /* wordle.css */
 .wordle-container {
+  width: min(100%, 500px);
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
@@ -8,6 +9,7 @@
   align-items: center;
   gap: 20px;
   font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
 }
 
 .wordle-header {
@@ -46,16 +48,18 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 20px;
+  width: min(100%, 330px);
 }
 
 .wordle-row {
   display: flex;
   gap: 5px;
+  width: 100%;
 }
 
 .wordle-cell {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  aspect-ratio: 1;
   border: 2px solid #d3d6da;
   display: flex;
   align-items: center;
@@ -108,6 +112,7 @@
 /* Keyboard Styles */
 .wordle-keyboard {
   width: 100%;
+  max-width: 520px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -117,10 +122,13 @@
   display: flex;
   gap: 6px;
   justify-content: center;
+  width: 100%;
 }
 
 .keyboard-key {
-  min-width: 40px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 48px;
   height: 58px;
   padding: 0 10px;
   background-color: #d3d6da;
@@ -149,7 +157,8 @@
 }
 
 .keyboard-key.special-key {
-  min-width: 65px;
+  flex: 1.45 1 0;
+  max-width: 72px;
   font-size: 0.8rem;
   background-color: #aaa;
 }
@@ -190,20 +199,16 @@
   }
 
   .wordle-cell {
-    width: 55px;
-    height: 55px;
     font-size: 1.8rem;
   }
 
   .keyboard-key {
-    min-width: 36px;
     height: 54px;
     font-size: 0.95rem;
     padding: 0 8px;
   }
 
   .keyboard-key.special-key {
-    min-width: 60px;
     font-size: 0.75rem;
   }
 
@@ -227,6 +232,7 @@
   .wordle-grid {
     gap: 4px;
     margin-bottom: 15px;
+    width: min(100%, 270px);
   }
 
   .wordle-row {
@@ -234,8 +240,6 @@
   }
 
   .wordle-cell {
-    width: 50px;
-    height: 50px;
     font-size: 1.5rem;
     border-width: 2px;
   }
@@ -245,14 +249,12 @@
   }
 
   .keyboard-key {
-    min-width: 28px;
     height: 50px;
     font-size: 0.85rem;
     padding: 0 5px;
   }
 
   .keyboard-key.special-key {
-    min-width: 50px;
     font-size: 0.7rem;
   }
 
@@ -281,6 +283,7 @@
 
   .wordle-grid {
     gap: 3px;
+    width: min(100%, 240px);
   }
 
   .wordle-row {
@@ -288,8 +291,6 @@
   }
 
   .wordle-cell {
-    width: 45px;
-    height: 45px;
     font-size: 1.3rem;
     border-width: 1.5px;
   }
@@ -299,14 +300,12 @@
   }
 
   .keyboard-key {
-    min-width: 24px;
     height: 46px;
     font-size: 0.8rem;
     padding: 0 4px;
   }
 
   .keyboard-key.special-key {
-    min-width: 45px;
     font-size: 0.65rem;
   }
 
@@ -329,6 +328,7 @@
 
   .wordle-grid {
     gap: 2px;
+    width: min(100%, 215px);
   }
 
   .wordle-row {
@@ -336,8 +336,6 @@
   }
 
   .wordle-cell {
-    width: 40px;
-    height: 40px;
     font-size: 1.2rem;
     border-width: 1.5px;
   }
@@ -347,14 +345,12 @@
   }
 
   .keyboard-key {
-    min-width: 22px;
     height: 42px;
     font-size: 0.75rem;
     padding: 0 3px;
   }
 
   .keyboard-key.special-key {
-    min-width: 40px;
     font-size: 0.6rem;
   }
 
@@ -385,8 +381,6 @@
   }
 
   .wordle-cell {
-    width: 45px;
-    height: 45px;
     font-size: 1.3rem;
   }
 

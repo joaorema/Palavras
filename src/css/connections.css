@@ -78,11 +78,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
 }
 
 .word-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -92,6 +95,7 @@
   border-radius: 10px;
   margin-bottom: 12px;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .msg-div {
@@ -112,10 +116,12 @@
 }
 
 .first-div {
+  width: min(100%, 640px);
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   font-family: monospace;
+  box-sizing: border-box;
 }
 
 .second-div {
@@ -142,7 +148,7 @@
   }
 
   .word-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     margin-bottom: 15px;
   }
@@ -193,7 +199,7 @@
   }
 
   .word-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
   }
 
@@ -226,6 +232,10 @@
 
 /* Very small screens */
 @media (max-width: 360px) {
+  .first-div {
+    padding: 8px 4px;
+  }
+
   .map-div {
     padding: 8px 4px;
     font-size: 0.7rem;

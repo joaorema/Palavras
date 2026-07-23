@@ -8,8 +8,8 @@ html, body, #root {
 
 .app-container {
   /* Use dvh for mobile address bar support, fall back to vh */
-  height: 100dvh; 
   height: 100vh; /* Fallback for older browsers */
+  height: 100dvh;
   
   display: flex;
   flex-direction: column;
@@ -19,6 +19,7 @@ html, body, #root {
 
 .main-content {
   flex: 1;                /* Take all available space between header/footer */
+  min-height: 0;
   width: 100%;
   
   /* THIS IS THE KEY FIX: */
@@ -56,6 +57,9 @@ html, body, #root {
     backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -65,6 +69,9 @@ html, body, #root {
   }
 
   .navbar-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     font: mono;
   }
