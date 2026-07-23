@@ -13,8 +13,10 @@ function RegisterPage() {
 
   const handleForm = async () => {
     setError("");
+    const trimmedUsername = username.trim();
+    const normalizedEmail = email.trim().toLowerCase();
 
-    if (!username || !email || !password) {
+    if (!trimmedUsername || !normalizedEmail || !password) {
       setError("Username, email ou password em falta");
       return;
     }
@@ -28,11 +30,11 @@ function RegisterPage() {
 
     try {
       const { error: signupError } = await supabase.auth.signUp({
-        email,
+        email: normalizedEmail,
         password,
         options: {
           data: {
-            display_name: username,
+            display_name: trimmedUsername,
           },
         },
       });
@@ -43,7 +45,6 @@ function RegisterPage() {
     } catch (err) {
       const message = err instanceof Error ? err.message : "Erro no registo";
       setError(message);
-      console.error("Registration failed", err);
     } finally {
       setLoading(false);
     }
@@ -53,39 +54,48 @@ function RegisterPage() {
     <div className="register-container font-mono">
       <div className="register-box">
         <div className="register">
-          <h2>Register Page</h2>
+          <h2>Nova Conta</h2>
           {error && (
             <p className="error-message" style={{ color: "red" }}>
               {error}
             </p>
           )}
-          <form onSubmit={(event) => event.preventDefault()}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              void handleForm();
+            }}
+          >
             <input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
+              autoComplete="username"
             />
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              autoComplete="new-password"
             />
           </form>
         </div>
         <button
+          type="button"
           onClick={handleForm}
           disabled={loading}
           className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer"
         >
-          <span className="relative">{loading ? "A registar..." : "Register"}</span>
+          <span className="relative">{loading ? "A registar..." : "Criar conta"}</span>
         </button>
       </div>
     </div>

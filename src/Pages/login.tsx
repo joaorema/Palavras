@@ -12,8 +12,9 @@ function LoginPage() {
 
   const loginClick = async () => {
     setError("");
+    const normalizedEmail = email.trim().toLowerCase();
 
-    if (!email || !password) {
+    if (!normalizedEmail || !password) {
       setError("Email ou password em falta");
       return;
     }
@@ -22,16 +23,15 @@ function LoginPage() {
 
     try {
       const { error: loginError } = await supabase.auth.signInWithPassword({
-        email,
+        email: normalizedEmail,
         password,
       });
 
       if (loginError) throw loginError;
 
       navigate("/home");
-    } catch (err) {
-      console.error("Login failed", err);
-      setError("Credenciais inválidas ou erro de conexão");
+    } catch {
+      setError("Credenciais invalidas ou erro de conexao");
     } finally {
       setLoading(false);
     }
@@ -47,23 +47,32 @@ function LoginPage() {
               {error}
             </p>
           )}
-          <form className="font-mono" onSubmit={(event) => event.preventDefault()}>
+          <form
+            className="font-mono"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void loginClick();
+            }}
+          >
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
             />
           </form>
         </div>
 
         <button
+          type="button"
           onClick={loginClick}
           disabled={loading}
           className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer"
@@ -72,6 +81,7 @@ function LoginPage() {
         </button>
 
         <button
+          type="button"
           onClick={() => navigate("/register")}
           className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer"
         >
