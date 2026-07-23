@@ -238,14 +238,14 @@ function WordleGame() {
       </div>
 
       {gameOver ? (
-        <div className="mt-8 flex flex-col items-center gap-6 animate-fadeIn">
+        <div className="wordle-actions flex flex-col items-center animate-fadeIn">
           <div className={`game-status font-mono text-xl font-bold ${won ? "text-green-500" : "text-red-500"}`}>
             {won ? "✓ Ganhaste!" : `✗ A palavra era: ${targetWord}`}
           </div>
           <Button2 onClick={() => navigate("/wordlelevel")} title="Voltar aos Níveis" />
         </div>
       ) : (
-        <div className="mt-8 flex justify-center">
+        <div className="wordle-actions flex justify-center">
           <Button1 href="/wordlelevel" title="Sair" />
         </div>
       )}
