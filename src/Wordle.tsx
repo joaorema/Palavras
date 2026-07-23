@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 import "./css/wordle.css";
-import { getWordleWord } from "./data/wordleLevels";
+import { getWordleWord, WORDLE_WORDS } from "./data/wordleLevels";
 import { supabase } from "./supabaseClient";
 
 const WORD_LENGTH = 5;
@@ -27,6 +27,7 @@ function WordleGame() {
   const navigate = useNavigate();
   const { levelNumber } = (location.state ?? {}) as LocationState;
   const targetWord = levelNumber ? getWordleWord(levelNumber) : undefined;
+  const hasNextLevel = Boolean(levelNumber && levelNumber < WORDLE_WORDS.length);
 
   const [guesses, setGuesses] = useState(Array(MAX_GUESSES).fill(""));
   const [currentGuess, setCurrentGuess] = useState("");
@@ -41,6 +42,15 @@ function WordleGame() {
       navigate("/wordlelevel", { replace: true });
     }
   }, [navigate, targetWord]);
+
+  const resetGame = useCallback(() => {
+    setGuesses(Array(MAX_GUESSES).fill(""));
+    setCurrentGuess("");
+    setCurrentRow(0);
+    setGameOver(false);
+    setWon(false);
+    setLetterStatus({});
+  }, []);
 
   const saveProgress = useCallback(async () => {
     if (!levelNumber) return;
@@ -127,6 +137,17 @@ function WordleGame() {
     setCurrentRow((row) => row + 1);
     setCurrentGuess("");
   }, [currentGuess, currentRow, guesses, saveProgress, targetWord, updateLetterStatus]);
+
+  const handleNextLevel = () => {
+    if (!levelNumber || !hasNextLevel) return;
+
+    resetGame();
+    setShowInstructions(false);
+    navigate("/wordle", {
+      replace: true,
+      state: { levelNumber: levelNumber + 1 },
+    });
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -242,6 +263,7 @@ function WordleGame() {
           <div className={`game-status font-mono text-xl font-bold ${won ? "text-green-500" : "text-red-500"}`}>
             {won ? "✓ Ganhaste!" : `✗ A palavra era: ${targetWord}`}
           </div>
+          {won && hasNextLevel && <Button2 onClick={handleNextLevel} title="Next level" />}
           <Button2 onClick={() => navigate("/wordlelevel")} title="Voltar aos Níveis" />
         </div>
       ) : (

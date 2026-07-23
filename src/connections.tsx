@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 import "/src/css/connections.css";
+import { levels as connectionLevels } from "./Pages/conexaolvls";
 import { supabase } from "./supabaseClient";
 
 const MAX_MISTAKES = 4;
@@ -185,6 +186,27 @@ export default function ConnectionGame() {
 
   const solvedWords = new Set(solvedGroups.flatMap((group) => group.words));
   const remainingWords = words.filter((word) => !solvedWords.has(word.text));
+  const won = gameOver && solvedGroups.length === 4;
+  const hasNextLevel = Boolean(levelNumber && levelNumber < connectionLevels.length);
+
+  const handleNextLevel = () => {
+    if (!levelNumber || !hasNextLevel) return;
+
+    const nextLevelNumber = levelNumber + 1;
+    const nextLevelData = connectionLevels[nextLevelNumber - 1];
+
+    setConnectionPacks(nextLevelData);
+    setLevelNumber(nextLevelNumber);
+    setupGame(nextLevelData);
+    setShowInstructions(false);
+    navigate("/conexao", {
+      replace: true,
+      state: {
+        levelData: nextLevelData,
+        levelNumber: nextLevelNumber,
+      },
+    });
+  };
 
   return (
     <div className="first-div relative">
@@ -267,6 +289,7 @@ export default function ConnectionGame() {
         </div>
       ) : (
         <div className="mt-6 flex flex-col items-center gap-4">
+          {won && hasNextLevel && <Button2 onClick={handleNextLevel} title="Next level" />}
           <Button2 onClick={() => navigate("/connectionlevel")} title="Voltar aos Níveis" />
         </div>
       )}
