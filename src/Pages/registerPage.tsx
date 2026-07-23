@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/register.css";
 import { supabase } from "../supabaseClient";
@@ -10,6 +10,14 @@ function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate("/home", { replace: true });
+      }
+    });
+  }, [navigate]);
 
   const handleForm = async () => {
     setError("");
@@ -29,7 +37,7 @@ function RegisterPage() {
     setLoading(true);
 
     try {
-      const { error: signupError } = await supabase.auth.signUp({
+      const { data, error: signupError } = await supabase.auth.signUp({
         email: normalizedEmail,
         password,
         options: {
@@ -41,9 +49,17 @@ function RegisterPage() {
 
       if (signupError) throw signupError;
 
-      navigate("/login");
+      if (data.session) {
+        navigate("/home");
+      } else {
+        setError("Conta criada. Confirma o email antes de entrar.");
+      }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Erro no registo";
+      const message =
+        err instanceof Error && err.message === "User already registered"
+          ? "Este email ja tem conta. Faz login ou usa recuperar password."
+          : "Erro no registo. Tenta novamente.";
+
       setError(message);
     } finally {
       setLoading(false);

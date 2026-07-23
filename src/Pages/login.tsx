@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 import { supabase } from "../supabaseClient";
@@ -9,6 +9,14 @@ function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate("/home", { replace: true });
+      }
+    });
+  }, [navigate]);
 
   const loginClick = async () => {
     setError("");
@@ -30,8 +38,13 @@ function LoginPage() {
       if (loginError) throw loginError;
 
       navigate("/home");
-    } catch {
-      setError("Credenciais invalidas ou erro de conexao");
+    } catch (err) {
+      const message =
+        err instanceof Error && err.message === "Invalid login credentials"
+          ? "Email ou password incorretos"
+          : "Nao foi possivel entrar. Tenta novamente.";
+
+      setError(message);
     } finally {
       setLoading(false);
     }
