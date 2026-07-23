@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 import "/src/css/connections.css";
-import { levels as allLevels } from "./Pages/conexaolvls";
 import { supabase } from "./supabaseClient";
 
 const MAX_MISTAKES = 4;
@@ -59,15 +58,20 @@ export default function ConnectionGame() {
 
   useEffect(() => {
     const state = (location.state ?? {}) as LocationState;
-    const randomIndex = Math.floor(Math.random() * allLevels.length);
-    const activeLevelData = state.levelData ?? allLevels[randomIndex];
-    const activeLevelNumber = state.levelNumber ?? randomIndex + 1;
+
+    if (!state.levelData || !state.levelNumber) {
+      navigate("/connectionlevel", { replace: true });
+      return;
+    }
+
+    const activeLevelData = state.levelData;
+    const activeLevelNumber = state.levelNumber;
 
     setConnectionPacks(activeLevelData);
     setLevelNumber(activeLevelNumber);
     setupGame(activeLevelData);
     setIsLoading(false);
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   const setupGame = (packs: ConnectionPack[]) => {
     const flatWords = packs.flatMap((pack) =>
