@@ -116,7 +116,7 @@ export default function WordleLevelPage() {
                 }`}
               >
                 Nivel {level}
-                {isDone && <span>OK</span>}
+                {isDone && <span aria-label="Nivel concluido">✅</span>}
               </span>
             </button>
           );

@@ -109,7 +109,7 @@ export default function ConnectionLevelPage() {
                 }`}
               >
                 Nivel {level}
-                {isDone && <span>OK</span>}
+                {isDone && <span aria-label="Nivel concluido">✅</span>}
               </span>
             </button>
           );
