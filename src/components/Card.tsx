@@ -3,55 +3,48 @@ import { motion } from "framer-motion";
 
 interface GameProps {
   title: string;
+  description: string;
+  meta: string;
   imageSrc?: string;
   videoSrc?: string;
+  tone?: string;
   onClick?: () => void;
 }
 
 const GameCard: React.FC<GameProps> = ({
   title,
+  description,
+  meta,
   imageSrc,
   videoSrc,
+  tone = "wordle",
   onClick,
 }) => {
   return (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.05, y: -4 }}
-      whileTap={{ scale: 0.95 }}
-      className="
-        flex flex-col items-center justify-between 
-        bg-white/10 backdrop-blur-md 
-        border border-white/20 
-        rounded-2xl overflow-hidden
-        shadow-md hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]
-        
-        /* RESPONSIVE SIZING */
-        w-64 h-80           /* Default size (Mobile/Tablet) */
-        md:w-72 md:h-96     /* Medium screens */
-        lg:w-80 lg:h-[400px] /* Large screens - cap it here */
-        transition duration-200
-      "
+      whileHover={{ y: -3 }}
+      whileTap={{ scale: 0.98 }}
+      className={`game-card game-card-${tone}`}
+      aria-label={`Jogar ${title}`}
     >
-      
-      <div className="flex-1 w-full overflow-hidden">
+      <div className="game-card-preview" aria-hidden="true">
         {videoSrc ? (
-          <video
-            src={videoSrc}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
+          <video src={videoSrc} autoPlay loop muted playsInline />
+        ) : imageSrc ? (
+          <img src={imageSrc} alt={title} />
         ) : (
-          <img
-            src={imageSrc}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
+          <div className="game-card-fallback" />
         )}
       </div>
+
+      <div className="game-card-copy">
+        <span className="game-card-meta">{meta}</span>
+        <strong>{title}</strong>
+        <p>{description}</p>
+      </div>
+
+      <span className="game-card-action">Jogar</span>
     </motion.button>
   );
 };
