@@ -1,48 +1,41 @@
-import { Navigate, NavigationType, useNavigate } from "react-router-dom";
-import "../css/GamePage.css";
+import { useNavigate } from "react-router-dom";
 import GameCard from "../components/Card";
 import Button1 from "../components/button1";
+import "../css/GamePage.css";
+
+const games = [
+  {
+    title: "Palavras",
+    videoSrc: "/palavrasvideo.webm",
+    route: "/wordlelevel",
+  },
+  {
+    title: "Conexões",
+    videoSrc: "/conexoesvideo.webm",
+    route: "/connectionlevel",
+  },
+];
 
 function GamePage() {
   const navigate = useNavigate();
-  const btn1Click = () => {
-    navigate("/palavras");
-  };
-  const btn2Click = () => {
-    navigate("/conexao");
-  };
-  const backBtnClick = () =>{
-    navigate("/home")
-  }
-  const Games = [
-    {
-      title: "Palavras",
-      videoSrc: "/palavrasvideo.webm",
-      //imageSrc: "../../public/PalavrasPhoto.png",
-      onClick: () => navigate("/wordlelevel"),
-    },
-    {
-      title: "Conexões",
-      videoSrc: "/conexoesvideo.webm",
-      //imageSrc: "../../public/incoming.png",
-      onClick: () => navigate("/connectionlevel"),
-    },
-  ];
 
   return (
-    <>
-      <div className="home-container">
-        <div className="button-div">
-          {Games.map((game, index) => (
-          <GameCard key={index} {...game} />
+    <div className="home-container">
+      <div className="button-div">
+        {games.map((game) => (
+          <GameCard
+            key={game.route}
+            title={game.title}
+            videoSrc={game.videoSrc}
+            onClick={() => navigate(game.route)}
+          />
         ))}
-        </div>
-
-        <div className="backbtn-div">
-          <Button1 href="/home" title="Voltar" ></Button1> 
-        </div>
       </div>
-    </>
+
+      <div className="backbtn-div">
+        <Button1 href="/home" title="Voltar" />
+      </div>
+    </div>
   );
 }
 

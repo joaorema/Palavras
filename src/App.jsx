@@ -1,14 +1,9 @@
-import { useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import Home from './Pages/Home'
 import NavBar from './components/navBar'
 import {Routes, Route} from 'react-router-dom'
 import './css/App.css'
 import './css/Footer.css'
 import GamePage from './Pages/GamePage'
-import PalavrasPage from './Pages/Palavras'
-import ConexaoPage from './Pages/Conexao'
 import Footer from './components/footer'
 import LoginPage from './Pages/login'
 import RegisterPage from './Pages/registerPage'
@@ -27,14 +22,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/games" element={<GamePage />} />
-          <Route path="/palavras" element={<PalavrasPage />} />
           <Route path="/conexao" element={<ConnectionGame />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/wordlelevel" element={<WordleLevelPage></WordleLevelPage>} />
+          <Route path="/wordlelevel" element={<WordleLevelPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/wordle" element={<WordleGame />} />
           <Route path="/perfil" element={<ProfilePage />} />
-          <Route path="connectionlevel" element={<ConnectionLevelPage />} />
+          <Route path="/connectionlevel" element={<ConnectionLevelPage />} />
         </Routes>
       </main>
       <Footer />

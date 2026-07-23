@@ -1,8 +1,7 @@
-import "../css/register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// Importe o cliente que criamos no passo anterior
-import { supabase } from "../supabaseClient"; 
+import "../css/register.css";
+import { supabase } from "../supabaseClient";
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -15,23 +14,22 @@ function RegisterPage() {
   const handleForm = async () => {
     setError("");
 
-    // Validações básicas
     if (!username || !email || !password) {
-      setError("Username, Email or Password missing");
+      setError("Username, email ou password em falta");
       return;
     }
-    if (password.length < 6) { // Supabase exige no mínimo 6 caracteres por padrão
-      setError("Password must have at least 6 characters");
+
+    if (password.length < 8) {
+      setError("A password deve ter pelo menos 8 caracteres");
       return;
     }
 
     setLoading(true);
 
     try {
-      // Chamada oficial do Supabase Auth
-      const { data, error: signupError } = await supabase.auth.signUp({
-        email: email,
-        password: password,
+      const { error: signupError } = await supabase.auth.signUp({
+        email,
+        password,
         options: {
           data: {
             display_name: username,
@@ -39,13 +37,12 @@ function RegisterPage() {
         },
       });
 
-      if (signupError) 
-        throw signupError;
-      //alert("Check your email for confirmation link!");
-      navigate("/login"); 
+      if (signupError) throw signupError;
 
+      navigate("/login");
     } catch (err) {
-      setError(err.message || "Registration error");
+      const message = err instanceof Error ? err.message : "Erro no registo";
+      setError(message);
       console.error("Registration failed", err);
     } finally {
       setLoading(false);
@@ -57,34 +54,38 @@ function RegisterPage() {
       <div className="register-box">
         <div className="register">
           <h2>Register Page</h2>
-          {error && <p className="error-message" style={{color: 'red'}}>{error}</p>}
-          <form onSubmit={(e) => e.preventDefault()}>
+          {error && (
+            <p className="error-message" style={{ color: "red" }}>
+              {error}
+            </p>
+          )}
+          <form onSubmit={(event) => event.preventDefault()}>
             <input
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(event) => setUsername(event.target.value)}
             />
             <input
-              type="email" 
+              type="email"
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </form>
         </div>
-        <button 
-          onClick={handleForm} 
+        <button
+          onClick={handleForm}
           disabled={loading}
           className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer"
         >
-          <span className="relative">{loading ? "Registering..." : "Register"}</span>
+          <span className="relative">{loading ? "A registar..." : "Register"}</span>
         </button>
       </div>
     </div>

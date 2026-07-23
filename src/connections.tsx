@@ -1,19 +1,44 @@
-// @ts-nocheck
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { supabase } from "./supabaseClient";
-import { levels as allLevels } from "./Pages/conexaolvls";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 import "/src/css/connections.css";
+import { levels as allLevels } from "./Pages/conexaolvls";
+import { supabase } from "./supabaseClient";
 
-// Helper for shuffling
-function shuffle(array) {
+const MAX_MISTAKES = 4;
+
+interface ConnectionPack {
+  words: string[];
+  category: string;
+  color: string;
+}
+
+interface GameWord {
+  text: string;
+  category: string;
+  color: string;
+}
+
+interface SolvedGroup {
+  category: string;
+  words: string[];
+  color: string;
+}
+
+interface LocationState {
+  levelData?: ConnectionPack[];
+  levelNumber?: number;
+}
+
+function shuffle<T>(array: T[]) {
   const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+
+  for (let index = arr.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [arr[index], arr[swapIndex]] = [arr[swapIndex], arr[index]];
   }
+
   return arr;
 }
 
@@ -21,84 +46,77 @@ export default function ConnectionGame() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Level & Data State
-  const [connectionPacks, setConnectionPacks] = useState([]);
-  const [levelNumber, setLevelNumber] = useState(null);
+  const [connectionPacks, setConnectionPacks] = useState<ConnectionPack[]>([]);
+  const [levelNumber, setLevelNumber] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Game Logic State
-  const [words, setWords] = useState([]);     
-  const [selectedWords, setSelectedWords] = useState([]);   
-  const [solvedGroups, setSolvedGroups] = useState([]);     
-  const [mistakes, setMistakes] = useState(0);              
-  const [message, setMessage] = useState("");               
+  const [words, setWords] = useState<GameWord[]>([]);
+  const [selectedWords, setSelectedWords] = useState<GameWord[]>([]);
+  const [solvedGroups, setSolvedGroups] = useState<SolvedGroup[]>([]);
+  const [mistakes, setMistakes] = useState(0);
+  const [message, setMessage] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
 
-  // 1. Initialize Level Data
   useEffect(() => {
-    let activeLevelData = null;
-    let activeLevelNum = null;
-
-    if (location.state && location.state.levelData) {
-      activeLevelData = location.state.levelData;
-      activeLevelNum = location.state.levelNumber;
-    } else {
-      // Fallback if user refreshes or enters directly
-      const randomIndex = Math.floor(Math.random() * allLevels.length);
-      activeLevelData = allLevels[randomIndex];
-      activeLevelNum = randomIndex + 1;
-    }
+    const state = (location.state ?? {}) as LocationState;
+    const randomIndex = Math.floor(Math.random() * allLevels.length);
+    const activeLevelData = state.levelData ?? allLevels[randomIndex];
+    const activeLevelNumber = state.levelNumber ?? randomIndex + 1;
 
     setConnectionPacks(activeLevelData);
-    setLevelNumber(activeLevelNum);
+    setLevelNumber(activeLevelNumber);
     setupGame(activeLevelData);
     setIsLoading(false);
   }, [location.state]);
 
-  const setupGame = (packs) => {
-    const flatWords = packs.flatMap(pack =>       
-      pack.words.map(word => ({                             
+  const setupGame = (packs: ConnectionPack[]) => {
+    const flatWords = packs.flatMap((pack) =>
+      pack.words.map((word) => ({
         text: word,
         category: pack.category,
-        color: pack.color
-      }))
+        color: pack.color,
+      })),
     );
-    setWords(shuffle(flatWords));                           
-    setSelectedWords([]);                                   
-    setSolvedGroups([]);                                    
-    setMistakes(0);                                         
-    setMessage("");                                       
-    setGameOver(false);   
+
+    setWords(shuffle(flatWords));
+    setSelectedWords([]);
+    setSolvedGroups([]);
+    setMistakes(0);
+    setMessage("");
+    setGameOver(false);
   };
 
-  // 2. Save Progress to Supabase
   const saveWinProgress = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user && levelNumber) {
-        const { error } = await supabase
-          .from('connections_progress') // Ensure this table exists in Supabase
-          .upsert({ 
-            user_id: user.id, 
-            level_number: levelNumber 
-          }, { onConflict: 'user_id, level_number' });
+    if (!levelNumber) return;
 
-        if (error) throw error;
-      }
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { error } = await supabase.from("connections_progress").upsert(
+        {
+          user_id: user.id,
+          level_number: levelNumber,
+        },
+        { onConflict: "user_id, level_number" },
+      );
+
+      if (error) throw error;
     } catch (err) {
-      console.error("Error saving progress:", err.message);
+      console.error("Erro ao guardar progresso:", err);
     }
   };
 
-  // 3. Game Actions
-  const toggleWord = (word) => {
-    if (gameOver || solvedGroups.some(g => g.words.includes(word.text))) return;
+  const toggleWord = (word: GameWord) => {
+    if (gameOver || solvedGroups.some((group) => group.words.includes(word.text))) return;
 
-    if (selectedWords.find(w => w.text === word.text)) {
-      setSelectedWords(selectedWords.filter(w => w.text !== word.text));
+    if (selectedWords.some((selectedWord) => selectedWord.text === word.text)) {
+      setSelectedWords((currentWords) => currentWords.filter((selectedWord) => selectedWord.text !== word.text));
     } else if (selectedWords.length < 4) {
-      setSelectedWords([...selectedWords, word]);
+      setSelectedWords((currentWords) => [...currentWords, word]);
     }
   };
 
@@ -108,16 +126,21 @@ export default function ConnectionGame() {
       return;
     }
 
-    const categories = [...new Set(selectedWords.map(w => w.category))];
-    
+    const categories = [...new Set(selectedWords.map((word) => word.category))];
+
     if (categories.length === 1) {
-      const pack = connectionPacks.find(p => p.category === categories[0]);
-      const newSolvedGroups = [...solvedGroups, {
-        category: pack.category,
-        words: selectedWords.map(w => w.text),
-        color: pack.color
-      }];
-      
+      const pack = connectionPacks.find((connectionPack) => connectionPack.category === categories[0]);
+      if (!pack) return;
+
+      const newSolvedGroups = [
+        ...solvedGroups,
+        {
+          category: pack.category,
+          words: selectedWords.map((word) => word.text),
+          color: pack.color,
+        },
+      ];
+
       setSolvedGroups(newSolvedGroups);
       setSelectedWords([]);
       setMessage(`✓ Correto: ${pack.category}`);
@@ -127,25 +150,27 @@ export default function ConnectionGame() {
         setMessage("Parabéns! Ganhaste!");
         saveWinProgress();
       }
-    } else {
-      const newMistakes = mistakes + 1;
-      setMistakes(newMistakes);
-      setMessage(`✗ Incorreto! Tentativas: ${4 - newMistakes}`);
-      
-      if (newMistakes >= 4) {
-        setGameOver(true);
-        setMessage("Fim de jogo! Sem mais tentativas.");
-      }
+
+      return;
+    }
+
+    const newMistakes = mistakes + 1;
+    setMistakes(newMistakes);
+    setMessage(`✗ Incorreto! Tentativas: ${MAX_MISTAKES - newMistakes}`);
+
+    if (newMistakes >= MAX_MISTAKES) {
+      setGameOver(true);
+      setMessage("Fim de jogo! Sem mais tentativas.");
     }
   };
 
   const handleShuffle = () => {
-    const unsolved = words.filter(w => !solvedGroups.some(g => g.words.includes(w.text)));
-    const solved = words.filter(w => solvedGroups.some(g => g.words.includes(w.text)));
+    const solvedWords = new Set(solvedGroups.flatMap((group) => group.words));
+    const unsolved = words.filter((word) => !solvedWords.has(word.text));
+    const solved = words.filter((word) => solvedWords.has(word.text));
     setWords([...solved, ...shuffle(unsolved)]);
   };
 
-  // 4. Render Guards
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono text-white">
@@ -154,14 +179,11 @@ export default function ConnectionGame() {
     );
   }
 
-  const remainingWords = words.filter(word => 
-    !solvedGroups.some(group => group.words.includes(word.text))
-  );
+  const solvedWords = new Set(solvedGroups.flatMap((group) => group.words));
+  const remainingWords = words.filter((word) => !solvedWords.has(word.text));
 
   return (
-    <div className="first-div relative"> 
-      
-      {/* Instructions Overlay */}
+    <div className="first-div relative">
       {showInstructions && (
         <div className="font-mono fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div className="w-full max-w-md rounded-xl border border-gray-700 bg-[#121213] p-6 text-white shadow-2xl">
@@ -174,62 +196,65 @@ export default function ConnectionGame() {
         </div>
       )}
 
-      {/* Level Indicator */}
-      <div className="absolute top-4 left-4 text-white/40 font-mono text-xs">
-        Nível {levelNumber}
-      </div>
+      <div className="absolute top-4 left-4 text-white/40 font-mono text-xs">Nível {levelNumber}</div>
 
-      <button onClick={() => setShowInstructions(true)} className="absolute top-4 right-4 h-8 w-8 rounded-full border border-gray-500 text-gray-300">?</button>
+      <button
+        onClick={() => setShowInstructions(true)}
+        className="absolute top-4 right-4 h-8 w-8 rounded-full border border-gray-500 text-gray-300"
+      >
+        ?
+      </button>
 
       <div className="second-div">
         <h1 className="game-header">Conexões</h1>
       </div>
 
       <div className="third-div">
-        <p className="font-mono text-white">Tentativas: {4 - mistakes}/4</p>
+        <p className="font-mono text-white">Tentativas: {MAX_MISTAKES - mistakes}/4</p>
         {message && (
-          <p className="msg-div" style={{ 
-            backgroundColor: message.includes('✓') ? '#0dd353' : message.includes('✗') ? '#880606' : '#0c3e80' 
-          }}>
+          <p
+            className="msg-div"
+            style={{
+              backgroundColor: message.includes("✓") ? "#0dd353" : message.includes("✗") ? "#880606" : "#0c3e80",
+            }}
+          >
             {message}
           </p>
         )}
       </div>
 
-      {/* Solved Categories */}
       <div className="flex flex-col gap-2 w-full max-w-md px-2">
-        {solvedGroups.map((group, index) => (
-          <div key={index} className="solved-div animate-fadeIn" style={{ background: group.color }}>
+        {solvedGroups.map((group) => (
+          <div key={group.category} className="solved-div animate-fadeIn" style={{ background: group.color }}>
             <div className="font-bold uppercase text-sm">{group.category}</div>
             <div className="text-xs">{group.words.join(", ")}</div>
           </div>
         ))}
       </div>
 
-      {/* Word Grid */}
       {!gameOver && (
         <div className="word-grid mt-4">
-          {remainingWords.map((word, index) => {
-            const isSelected = selectedWords.find(w => w.text === word.text);
+          {remainingWords.map((word) => {
+            const isSelected = selectedWords.some((selectedWord) => selectedWord.text === word.text);
+
             return (
-              <div 
-                key={index} 
-                className={`map-div transition-all duration-200 ${isSelected ? 'selected-word' : ''}`}
+              <button
+                key={`${word.category}-${word.text}`}
+                className={`map-div transition-all duration-200 ${isSelected ? "selected-word" : ""}`}
                 onClick={() => toggleWord(word)}
                 style={{
-                  background: isSelected ? '#2b5306' : '#4c1d95',
-                  border: isSelected ? '3px solid #fbbf24' : '1px solid rgba(255,255,255,0.1)',
-                  transform: isSelected ? 'scale(0.96)' : 'scale(1)'
+                  background: isSelected ? "#2b5306" : "#4c1d95",
+                  border: isSelected ? "3px solid #fbbf24" : "1px solid rgba(255,255,255,0.1)",
+                  transform: isSelected ? "scale(0.96)" : "scale(1)",
                 }}
               >
                 {word.text}
-              </div>
+              </button>
             );
           })}
         </div>
       )}
 
-      {/* Action UI */}
       {!gameOver ? (
         <div className="multiple-btns mt-6">
           <Button2 onClick={handleShuffle} title="Baralhar" />
