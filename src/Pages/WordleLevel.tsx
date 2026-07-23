@@ -18,7 +18,10 @@ const WORDS_LIST = [
   // --- DIFÍCEIS ---
   "BRUXA", "ROLHA", "GAITA", "XISTO", "CARRO", 
   "CHITA", "TERRA", "SERRA", "PEIXE", "ZEBRA", 
-  "BAIXO", "JUSTO", "ARROZ", "CAIXA", "QUASE"
+  "BAIXO", "JUSTO", "ARROZ", "CAIXA", "QUASE",
+
+  // --- NOVO NIVEL ---
+  "TREVO"
 ];
 
 export default function WordleLevelPage() {
@@ -26,7 +29,7 @@ export default function WordleLevelPage() {
   const [completedLevels, setCompletedLevels] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const levels = Array.from({ length: 50 }, (_, i) => i + 1);
+  const levels = Array.from({ length: WORDS_LIST.length }, (_, i) => i + 1);
 
   // Buscar progresso do banco de dados
   useEffect(() => {
