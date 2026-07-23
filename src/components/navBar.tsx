@@ -25,25 +25,27 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-links" style={{ fontSize: "20px", fontWeight: 700 }}>
-        <Link to="/home" className="nav-link">
-          Palavras | Conexões
+      <div className="navbar-inner">
+        <Link to="/home" className="navbar-brand">
+          Palavras <span aria-hidden="true">|</span> Conexões
         </Link>
 
-        {user ? (
-          <>
-            <Link to="/perfil" className="nav-link">
-              Perfil
+        <div className="navbar-links">
+          {user ? (
+            <>
+              <Link to="/perfil" className="nav-link">
+                Perfil
+              </Link>
+              <Link to="/home" className="nav-link" onClick={handleLogout}>
+                Logout
+              </Link>
+            </>
+          ) : (
+            <Link to="/login" className="nav-link font-mono">
+              Login
             </Link>
-            <Link to="/home" className="nav-link" onClick={handleLogout}>
-              Logout
-            </Link>
-          </>
-        ) : (
-          <Link to="/login" className="nav-link font-mono">
-            Login
-          </Link>
-        )}
+          )}
+        </div>
       </div>
     </nav>
   );

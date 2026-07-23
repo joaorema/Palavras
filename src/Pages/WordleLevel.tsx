@@ -97,6 +97,15 @@ export default function WordleLevelPage() {
                 <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 bg-green-500 rounded-full transition-all duration-500 ease-out group-hover:w-96 group-hover:h-96" />
               )}
 
+              {!isUnlocked && (
+                <span
+                  className="absolute top-2 left-1/2 z-10 -translate-x-1/2 rounded-full border border-amber-300/40 bg-black/35 px-2 py-0.5 text-xs text-amber-200 shadow-lg"
+                  aria-label="Nivel bloqueado"
+                >
+                  🔒
+                </span>
+              )}
+
               <span
                 className={`relative z-10 text-lg md:text-xl font-bold transition-colors flex items-center gap-2 ${
                   isDone
@@ -108,7 +117,6 @@ export default function WordleLevelPage() {
               >
                 Nivel {level}
                 {isDone && <span>OK</span>}
-                {!isUnlocked && <span>Bloq.</span>}
               </span>
             </button>
           );

@@ -11,14 +11,12 @@
 }
 
 .bg-bg1{
-    background: linear-gradient(
-        135deg,
-        #0a0a1a 0%, 
-        #0d1326 25%, 
-        #0b0f24 50%, 
-        #141233 75%, 
-        #1b1760 100%
-    );
+    background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 34%),
+        linear-gradient(135deg, #0e1117 0%, #151a23 48%, #231a3a 100%);
+}
+
+.bg-bg2 {
+  background: transparent;
 }
 
 /* Title */
@@ -38,7 +36,7 @@
   border-radius: 0.7rem;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  background: linear-gradient(135deg, #0891b2, #f59e0b);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s, opacity 0.3s;
 }
@@ -51,7 +49,7 @@
   border-radius: 0.7rem;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  background: linear-gradient(135deg, #0891b2, #f59e0b);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s, opacity 0.3s;
 }

@@ -94,6 +94,15 @@ export default function ConnectionLevelPage() {
                       : "bg-white/5 border-white/5 opacity-45 cursor-not-allowed"
                 }`}
             >
+              {!isUnlocked && (
+                <span
+                  className="absolute top-2 left-1/2 z-10 -translate-x-1/2 rounded-full border border-amber-300/40 bg-black/35 px-2 py-0.5 text-xs text-amber-200 shadow-lg"
+                  aria-label="Nivel bloqueado"
+                >
+                  🔒
+                </span>
+              )}
+
               <span
                 className={`relative z-10 text-lg font-bold flex items-center gap-2 ${
                   isDone ? "text-blue-400" : isUnlocked ? "text-gray-200" : "text-gray-500"
@@ -101,7 +110,6 @@ export default function ConnectionLevelPage() {
               >
                 Nivel {level}
                 {isDone && <span>OK</span>}
-                {!isUnlocked && <span>Bloq.</span>}
               </span>
             </button>
           );

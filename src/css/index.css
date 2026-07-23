@@ -1,11 +1,23 @@
 :root {
+  --bg1: #0e1117;
+  --bg2: #151a23;
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-strong: rgba(255, 255, 255, 0.14);
+  --text-main: #f8fafc;
+  --text-muted: #b7c0ce;
+  --accent-cool: #22d3ee;
+  --accent-warm: #fbbf24;
+  --accent-success: #7dd87a;
+  --accent-danger: #fb7185;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(to bottom right, #57951d, #3730a3, #2563eb);
+  color: var(--text-main);
+  background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 34%),
+    linear-gradient(135deg, #0e1117 0%, #151a23 48%, #231a3a 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

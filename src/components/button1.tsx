@@ -8,13 +8,13 @@ interface Button1Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const buttonClasses =
-  "relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group cursor-pointer";
+  "relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-slate-900 border border-cyan-300/20 rounded-lg group cursor-pointer shadow-lg shadow-black/20";
 
 function ButtonContents({ title }: { title: string }) {
   return (
     <>
-      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56" />
-      <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700" />
+      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-amber-400 rounded-full group-hover:w-56 group-hover:h-56" />
+      <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-40 bg-gradient-to-b from-cyan-500/20 via-transparent to-slate-950" />
       <span className="relative">{title}</span>
     </>
   );

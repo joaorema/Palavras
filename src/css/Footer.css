@@ -1,17 +1,35 @@
 .footer-bar {
-  /* Prevent the footer from shrinking if content is huge */
   flex-shrink: 0; 
-  
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
   text-align: center;
-  padding: 1rem;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
-  font-size: 0.9rem;
+  padding: 0.55rem 1rem;
+  color: var(--text-muted);
+  background: rgba(14, 17, 23, 0.72);
+  backdrop-filter: blur(10px);
+  font-size: clamp(0.72rem, 2.4vw, 0.86rem);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   width: 100%;
-  font-family: monospace; /* 'font: mono' is sometimes invalid, use font-family */
-  
-  /* You can remove margin-top: auto because the parent flex handles positioning now */
-  /* margin-top: auto; */ 
+  box-sizing: border-box;
+  font-family: monospace;
+  line-height: 1.2;
+}
+
+.footer-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--accent-warm);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 420px) {
+  .footer-bar {
+    min-height: 32px;
+    padding: 0.35rem 0.6rem;
+    gap: 0.35rem;
+  }
 }
