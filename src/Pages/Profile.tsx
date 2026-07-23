@@ -17,6 +17,15 @@ const PLACEHOLDERS = [
 
 interface ProfileUser {
   email?: string;
+  user_metadata?: {
+    avatar_index?: unknown;
+  };
+}
+
+function getSavedAvatarIndex(user: ProfileUser) {
+  const savedIndex = user.user_metadata?.avatar_index;
+
+  return typeof savedIndex === "number" && savedIndex >= 0 && savedIndex < PLACEHOLDERS.length ? savedIndex : 0;
 }
 
 function ProfilePage() {
@@ -24,6 +33,7 @@ function ProfilePage() {
   const [stats, setStats] = useState({ wordle: 0, connections: 0 });
   const [loading, setLoading] = useState(true);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [savingAvatar, setSavingAvatar] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +50,7 @@ function ProfilePage() {
         }
 
         setUser(currentUser);
+        setPhotoIndex(getSavedAvatarIndex(currentUser));
 
         const [{ count: wordleCount, error: wordleError }, { count: connCount, error: connError }] =
           await Promise.all([
@@ -75,6 +86,28 @@ function ProfilePage() {
     navigate("/login");
   };
 
+  const handleChangeAvatar = async () => {
+    if (savingAvatar) return;
+
+    const nextIndex = (photoIndex + 1) % PLACEHOLDERS.length;
+    const previousIndex = photoIndex;
+
+    setPhotoIndex(nextIndex);
+    setSavingAvatar(true);
+
+    const { error } = await supabase.auth.updateUser({
+      data: {
+        avatar_index: nextIndex,
+      },
+    });
+
+    if (error) {
+      setPhotoIndex(previousIndex);
+    }
+
+    setSavingAvatar(false);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg2 font-mono text-white">
@@ -98,10 +131,11 @@ function ProfilePage() {
           </div>
 
           <button
-            onClick={() => setPhotoIndex((index) => (index + 1) % PLACEHOLDERS.length)}
+            onClick={handleChangeAvatar}
+            disabled={savingAvatar}
             className="mt-4 px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-full text-sm transition-all border border-gray-600"
           >
-            Trocar Avatar
+            {savingAvatar ? "A guardar..." : "Trocar Avatar"}
           </button>
         </div>
 
