@@ -31,6 +31,8 @@ interface LocationState {
   levelNumber?: number;
 }
 
+type MessageKind = "info" | "success" | "warning" | "error";
+
 function shuffle<T>(array: T[]) {
   const arr = [...array];
 
@@ -54,6 +56,7 @@ export default function ConnectionGame() {
   const [solvedGroups, setSolvedGroups] = useState<SolvedGroup[]>([]);
   const [mistakes, setMistakes] = useState(0);
   const [message, setMessage] = useState("");
+  const [messageKind, setMessageKind] = useState<MessageKind>("info");
   const [gameOver, setGameOver] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
 
@@ -88,6 +91,7 @@ export default function ConnectionGame() {
     setSolvedGroups([]);
     setMistakes(0);
     setMessage("");
+    setMessageKind("info");
     setGameOver(false);
   };
 
@@ -128,6 +132,7 @@ export default function ConnectionGame() {
   const handleSubmit = () => {
     if (selectedWords.length !== 4) {
       setMessage("Selecione exatamente 4 palavras!");
+      setMessageKind("info");
       return;
     }
 
@@ -149,10 +154,12 @@ export default function ConnectionGame() {
       setSolvedGroups(newSolvedGroups);
       setSelectedWords([]);
       setMessage(`✓ Correto: ${pack.category}`);
+      setMessageKind("success");
 
       if (newSolvedGroups.length === 4) {
         setGameOver(true);
-        setMessage("Parabéns! Ganhaste!");
+        setMessage("Parabens! Ganhaste!");
+        setMessageKind("success");
         saveWinProgress();
       }
 
@@ -160,12 +167,24 @@ export default function ConnectionGame() {
     }
 
     const newMistakes = mistakes + 1;
+    const categoryMatches = selectedWords.reduce<Record<string, number>>((counts, word) => {
+      counts[word.category] = (counts[word.category] ?? 0) + 1;
+      return counts;
+    }, {});
+    const bestMatchCount = Math.max(...Object.values(categoryMatches));
+
     setMistakes(newMistakes);
-    setMessage(`✗ Incorreto! Tentativas: ${MAX_MISTAKES - newMistakes}`);
+    setMessage(
+      bestMatchCount === 3
+        ? `Quase! Tens 3 palavras certas. Tentativas: ${MAX_MISTAKES - newMistakes}`
+        : `Nao encaixa. Tentativas: ${MAX_MISTAKES - newMistakes}`,
+    );
+    setMessageKind(bestMatchCount === 3 ? "warning" : "error");
 
     if (newMistakes >= MAX_MISTAKES) {
       setGameOver(true);
       setMessage("Fim de jogo! Sem mais tentativas.");
+      setMessageKind("error");
     }
   };
 
@@ -238,12 +257,7 @@ export default function ConnectionGame() {
       <div className="third-div">
         <p className="font-mono text-white">Tentativas: {MAX_MISTAKES - mistakes}/4</p>
         {message && (
-          <p
-            className="msg-div"
-            style={{
-              backgroundColor: message.includes("✓") ? "#0dd353" : message.includes("✗") ? "#880606" : "#0c3e80",
-            }}
-          >
+          <p className={`msg-div msg-div-${messageKind}`} role="status" aria-live="polite">
             {message}
           </p>
         )}

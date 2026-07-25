@@ -261,7 +261,7 @@ function WordleGame() {
       {gameOver ? (
         <div className="wordle-actions flex flex-col items-center animate-fadeIn">
           <div className={`game-status font-mono text-xl font-bold ${won ? "text-green-500" : "text-red-500"}`}>
-            {won ? "✓ Ganhaste!" : `✗ A palavra era: ${targetWord}`}
+            {won ? "✓ Ganhaste!" : "✗ Nao foi desta!"}
           </div>
           {won && hasNextLevel && <Button2 onClick={handleNextLevel} title="Next level" />}
           <Button2 onClick={() => navigate("/wordlelevel")} title="Voltar aos Níveis" />
