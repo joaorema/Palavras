@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button1 from "../components/button1";
 import "../css/Profile.css";
+import { SOLETRA_LEVELS } from "../data/soletraLevels";
 import { WORDLE_WORDS } from "../data/wordleLevels";
 import { supabase } from "../supabaseClient";
 import { levels as connectionLevels } from "./conexaolvls";
@@ -28,6 +29,7 @@ interface ProfileUser {
 interface ProfileStats {
   wordleLevels: number[];
   connectionLevels: number[];
+  soletraLevels: number[];
 }
 
 function getSavedAvatarIndex(user: ProfileUser) {
@@ -82,7 +84,7 @@ function ProgressBar({ label, completed, total, tone }: { label: string; complet
 
 function ProfilePage() {
   const [user, setUser] = useState<ProfileUser | null>(null);
-  const [stats, setStats] = useState<ProfileStats>({ wordleLevels: [], connectionLevels: [] });
+  const [stats, setStats] = useState<ProfileStats>({ wordleLevels: [], connectionLevels: [], soletraLevels: [] });
   const [loading, setLoading] = useState(true);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [savingAvatar, setSavingAvatar] = useState(false);
@@ -104,17 +106,24 @@ function ProfilePage() {
         setUser(currentUser);
         setPhotoIndex(getSavedAvatarIndex(currentUser));
 
-        const [{ data: wordleData, error: wordleError }, { data: connData, error: connError }] = await Promise.all([
+        const [
+          { data: wordleData, error: wordleError },
+          { data: connData, error: connError },
+          { data: soletraData, error: soletraError },
+        ] = await Promise.all([
           supabase.from("player_progress").select("level_number").eq("user_id", currentUser.id),
           supabase.from("connections_progress").select("level_number").eq("user_id", currentUser.id),
+          supabase.from("soletra_progress").select("level_number").eq("user_id", currentUser.id),
         ]);
 
         if (wordleError) throw wordleError;
         if (connError) throw connError;
+        if (soletraError) throw soletraError;
 
         setStats({
           wordleLevels: [...new Set((wordleData ?? []).map((item) => item.level_number))].sort((a, b) => a - b),
           connectionLevels: [...new Set((connData ?? []).map((item) => item.level_number))].sort((a, b) => a - b),
+          soletraLevels: [...new Set((soletraData ?? []).map((item) => item.level_number))].sort((a, b) => a - b),
         });
       } catch (error) {
         console.error("Erro ao carregar perfil:", error);
@@ -164,12 +173,14 @@ function ProfilePage() {
   const displayName = user ? getDisplayName(user) : "Jogador";
   const wordleCompleted = stats.wordleLevels.length;
   const connectionsCompleted = stats.connectionLevels.length;
-  const totalCompleted = wordleCompleted + connectionsCompleted;
-  const totalLevels = WORDLE_WORDS.length + connectionLevels.length;
+  const soletraCompleted = stats.soletraLevels.length;
+  const totalCompleted = wordleCompleted + connectionsCompleted + soletraCompleted;
+  const totalLevels = WORDLE_WORDS.length + connectionLevels.length + SOLETRA_LEVELS.length;
   const totalPercent = Math.round((totalCompleted / totalLevels) * 100);
   const rank = getRank(totalCompleted);
   const nextWordleLevel = getNextLevel(stats.wordleLevels, WORDLE_WORDS.length);
   const nextConnectionLevel = getNextLevel(stats.connectionLevels, connectionLevels.length);
+  const nextSoletraLevel = getNextLevel(stats.soletraLevels, SOLETRA_LEVELS.length);
 
   return (
     <div className="profile-container font-mono">
@@ -202,7 +213,7 @@ function ProfilePage() {
           </div>
           <div className="profile-summary-card">
             <span>Proximo</span>
-            <strong>{Math.min(nextWordleLevel, nextConnectionLevel)}</strong>
+            <strong>{Math.min(nextWordleLevel, nextConnectionLevel, nextSoletraLevel)}</strong>
             <small>Menor nivel por acabar</small>
           </div>
         </div>
@@ -214,6 +225,7 @@ function ProfilePage() {
           </div>
           <ProgressBar label="Palavras" completed={wordleCompleted} total={WORDLE_WORDS.length} tone="wordle" />
           <ProgressBar label="Conexoes" completed={connectionsCompleted} total={connectionLevels.length} tone="connections" />
+          <ProgressBar label="Soletra" completed={soletraCompleted} total={SOLETRA_LEVELS.length} tone="soletra" />
         </div>
 
         <div className="profile-next-grid">
@@ -224,6 +236,10 @@ function ProfilePage() {
           <button className="profile-next-card" onClick={() => navigate("/connectionlevel")}>
             <span>Continuar Conexoes</span>
             <strong>Nivel {nextConnectionLevel}</strong>
+          </button>
+          <button className="profile-next-card" onClick={() => navigate("/soletralevel")}>
+            <span>Continuar Soletra</span>
+            <strong>Nivel {nextSoletraLevel}</strong>
           </button>
         </div>
 

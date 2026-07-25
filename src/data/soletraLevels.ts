@@ -1,0 +1,106 @@
+export interface SoletraLevel {
+  center: string;
+  letters: string[];
+  words: string[];
+  targetScore: number;
+}
+
+export const SOLETRA_LEVELS: SoletraLevel[] = [
+  {
+    center: "A",
+    letters: ["A", "E", "M", "O", "R", "S", "T"],
+    targetScore: 22,
+    words: [
+      "AMAR",
+      "AMAS",
+      "AMOR",
+      "AMORA",
+      "AROMA",
+      "ARTES",
+      "MESA",
+      "META",
+      "MOSTRA",
+      "RAMOS",
+      "RASTO",
+      "REMAR",
+      "RETAS",
+      "SOMAR",
+      "TOMAR",
+      "TORAS",
+    ],
+  },
+  {
+    center: "O",
+    letters: ["O", "A", "C", "L", "P", "R", "T"],
+    targetScore: 24,
+    words: [
+      "ALTO",
+      "ATOR",
+      "CALOR",
+      "COLAR",
+      "CORAL",
+      "CORTA",
+      "CORTAR",
+      "COTAR",
+      "LOCAL",
+      "LOCA",
+      "PALCO",
+      "PORTA",
+      "PRATO",
+      "TROCA",
+      "TROCAR",
+    ],
+  },
+  {
+    center: "I",
+    letters: ["I", "A", "C", "D", "L", "M", "R"],
+    targetScore: 20,
+    words: ["ACIMA", "CIMA", "CLIMA", "DICA", "DIRIA", "IRIA", "LIMA", "MACIA", "MIRAR", "RIMA", "RIMAR"],
+  },
+  {
+    center: "E",
+    letters: ["E", "A", "C", "F", "I", "R", "T"],
+    targetScore: 22,
+    words: ["ATEAR", "CAFE", "CERA", "CERTA", "FEIRA", "FEITA", "FERA", "FERIA", "FERIR", "RETA", "TERCA"],
+  },
+  {
+    center: "R",
+    letters: ["R", "A", "B", "E", "I", "L", "O"],
+    targetScore: 24,
+    words: ["ABRIL", "ABRIR", "BEIRA", "BIRRA", "BOLAR", "BORRA", "LIBRA", "OBRA", "RABO", "RAIO", "REAL", "ROLA", "ROLAR"],
+  },
+  {
+    center: "N",
+    letters: ["N", "A", "C", "E", "I", "O", "S"],
+    targetScore: 25,
+    words: ["ACENO", "ANOS", "CANOS", "CENAS", "CENSO", "CONE", "ENSINO", "ICONE", "NACOS", "NASCE", "NASCI", "NINOS", "SENAO"],
+  },
+  {
+    center: "U",
+    letters: ["U", "A", "D", "E", "R", "S", "T"],
+    targetScore: 22,
+    words: ["DUAS", "DURA", "DURAS", "RUAS", "RUDAS", "SAUDE", "SUAR", "SURDA", "URSA", "URSES", "USADA", "USAR", "USURA"],
+  },
+  {
+    center: "T",
+    letters: ["T", "A", "E", "I", "L", "N", "O"],
+    targetScore: 26,
+    words: ["ALTO", "ATENTO", "ELITE", "ENTAO", "LENTO", "LEITO", "NOITE", "TALENTO", "TANTO", "TENTO", "TONEL"],
+  },
+  {
+    center: "S",
+    letters: ["S", "A", "E", "I", "M", "O", "P"],
+    targetScore: 26,
+    words: ["MESA", "MESAS", "MESMO", "MISSA", "PESAM", "PESAS", "PESO", "PISAM", "POESIA", "SAMOS", "SOPAS"],
+  },
+  {
+    center: "L",
+    letters: ["L", "A", "C", "E", "I", "O", "V"],
+    targetScore: 18,
+    words: ["ALCE", "ALVO", "CALO", "CELO", "COVIL", "LACE", "LAVO", "LEAO", "LEVA", "LEVI", "LICE", "LOCAL", "VALE", "VELA", "VILA"],
+  },
+] as const;
+
+export function getSoletraLevel(levelNumber: number) {
+  return SOLETRA_LEVELS[levelNumber - 1];
+}

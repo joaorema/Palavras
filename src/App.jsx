@@ -8,10 +8,12 @@ import Footer from './components/footer'
 import LoginPage from './Pages/login'
 import RegisterPage from './Pages/registerPage'
 import WordleGame from './Wordle'
+import SoletraGame from './Soletra'
 import ProfilePage from './Pages/Profile'
 import ConnectionGame from './connections'
 import WordleLevelPage from './Pages/WordleLevel'
 import ConnectionLevelPage from './Pages/ConnetionLevel'
+import SoletraLevelPage from './Pages/SoletraLevel'
 
 function App() {
   return (
@@ -25,8 +27,10 @@ function App() {
           <Route path="/conexao" element={<ConnectionGame />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/wordlelevel" element={<WordleLevelPage />} />
+          <Route path="/soletralevel" element={<SoletraLevelPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/wordle" element={<WordleGame />} />
+          <Route path="/soletra" element={<SoletraGame />} />
           <Route path="/perfil" element={<ProfilePage />} />
           <Route path="/connectionlevel" element={<ConnectionLevelPage />} />
         </Routes>

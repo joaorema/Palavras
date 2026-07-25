@@ -20,6 +20,13 @@ const games = [
     route: "/connectionlevel",
     tone: "connections",
   },
+  {
+    title: "Soletra",
+    description: "Cria palavras com letras limitadas e uma letra obrigatoria.",
+    meta: "Letras & vocabulario",
+    route: "/soletralevel",
+    tone: "soletra",
+  },
 ];
 
 function GamePage() {

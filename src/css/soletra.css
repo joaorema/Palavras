@@ -1,0 +1,362 @@
+.soletra-container {
+  width: min(100%, 980px);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: clamp(10px, 2vw, 22px);
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2dvh, 20px);
+  box-sizing: border-box;
+}
+
+.soletra-topbar {
+  min-height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #facc15;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.soletra-topbar button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  border-radius: 50%;
+  background: rgba(250, 204, 21, 0.08);
+  color: #fde68a;
+  font-weight: 900;
+}
+
+.soletra-header {
+  text-align: center;
+}
+
+.soletra-header span {
+  color: #facc15;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.soletra-header h1 {
+  margin: 4px 0 0;
+  font-size: clamp(1.7rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.soletra-score-panel {
+  width: min(100%, 620px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid rgba(250, 204, 21, 0.18);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.soletra-score-panel span {
+  display: block;
+  color: #cbd5e1;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.soletra-score-panel strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.soletra-progress-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.soletra-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #facc15;
+}
+
+.soletra-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  gap: clamp(14px, 3vw, 24px);
+  align-items: stretch;
+}
+
+.soletra-play-area,
+.soletra-found-panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(8, 13, 24, 0.74);
+}
+
+.soletra-play-area {
+  min-height: 460px;
+  padding: clamp(14px, 3vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.soletra-current-word {
+  min-height: 44px;
+  width: min(100%, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid rgba(250, 204, 21, 0.45);
+  color: #f8fafc;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.soletra-hive {
+  position: relative;
+  width: min(72vw, 330px);
+  aspect-ratio: 1;
+}
+
+.soletra-tile {
+  position: absolute;
+  width: 34%;
+  aspect-ratio: 1.08;
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
+  border: 0;
+  background: #e5e7eb;
+  color: #111827;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 950;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.soletra-tile:hover {
+  transform: scale(1.04);
+  background: #f3f4f6;
+}
+
+.soletra-tile.center {
+  background: #facc15;
+}
+
+.soletra-tile-0 {
+  left: 33%;
+  top: 33%;
+  z-index: 2;
+}
+
+.soletra-tile-1 {
+  left: 33%;
+  top: 4%;
+}
+
+.soletra-tile-2 {
+  left: 58%;
+  top: 18.5%;
+}
+
+.soletra-tile-3 {
+  left: 58%;
+  top: 47.5%;
+}
+
+.soletra-tile-4 {
+  left: 33%;
+  top: 62%;
+}
+
+.soletra-tile-5 {
+  left: 8%;
+  top: 47.5%;
+}
+
+.soletra-tile-6 {
+  left: 8%;
+  top: 18.5%;
+}
+
+.soletra-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, auto));
+  gap: 8px;
+}
+
+.soletra-actions button {
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  font-weight: 900;
+}
+
+.soletra-actions button:hover {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: rgba(250, 204, 21, 0.12);
+}
+
+.soletra-message {
+  min-height: 24px;
+  margin: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.soletra-message-info {
+  color: #cbd5e1;
+}
+
+.soletra-message-success {
+  color: #86efac;
+}
+
+.soletra-message-error {
+  color: #fca5a5;
+}
+
+.soletra-found-panel {
+  min-height: 460px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.soletra-found-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.soletra-found-heading span,
+.soletra-found-heading strong {
+  font-weight: 900;
+}
+
+.soletra-found-heading span {
+  color: #fde68a;
+}
+
+.soletra-found-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  padding-top: 14px;
+  overflow-y: auto;
+}
+
+.soletra-found-list span {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(250, 204, 21, 0.12);
+  color: #fef3c7;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.soletra-found-list em {
+  color: #94a3b8;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.soletra-footer-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.soletra-complete-note {
+  color: #86efac;
+  font-weight: 900;
+}
+
+.soletra-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.soletra-modal-box {
+  width: min(100%, 430px);
+  padding: 24px;
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  border-radius: 8px;
+  background: #10131c;
+  text-align: center;
+}
+
+.soletra-modal-box h2 {
+  margin: 0 0 12px;
+}
+
+.soletra-modal-box p {
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+@media (max-width: 780px) {
+  .soletra-container {
+    padding: 8px;
+  }
+
+  .soletra-board {
+    grid-template-columns: 1fr;
+  }
+
+  .soletra-play-area,
+  .soletra-found-panel {
+    min-height: auto;
+  }
+
+  .soletra-score-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .soletra-actions {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .soletra-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .soletra-hive {
+    width: min(86vw, 300px);
+  }
+
+  .soletra-found-list {
+    max-height: 150px;
+  }
+}
