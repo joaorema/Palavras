@@ -155,7 +155,7 @@ function SoletraGame() {
     }
 
     if (!acceptedWords.has(guess)) {
-      setMessage("Ainda nao temos essa palavra na lista.");
+      setMessage(`Essa palavra nao faz parte da lista de ${level.words.length}.`);
       setMessageKind("error");
       return;
     }
