@@ -199,14 +199,15 @@ function WordleGame() {
   return (
     <div className="wordle-container relative">
       {levelNumber && (
-        <div className="absolute top-4 left-4 text-white/40 font-mono text-xs">
+        <div className="wordle-level-badge font-mono">
           Nível {levelNumber}
         </div>
       )}
 
       <button
         onClick={() => setShowInstructions(true)}
-        className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-gray-500 text-gray-300"
+        className="wordle-help-button"
+        aria-label="Abrir instruções"
       >
         ?
       </button>
