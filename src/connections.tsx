@@ -227,6 +227,11 @@ export default function ConnectionGame() {
     });
   };
 
+  const handleTryAgain = () => {
+    setupGame(connectionPacks);
+    setShowInstructions(false);
+  };
+
   return (
     <div className="first-div relative">
       {showInstructions && (
@@ -304,6 +309,7 @@ export default function ConnectionGame() {
       ) : (
         <div className="mt-6 flex flex-col items-center gap-4">
           {won && hasNextLevel && <Button2 onClick={handleNextLevel} title="Next level" />}
+          {!won && <Button2 onClick={handleTryAgain} title="Try again" />}
           <Button2 onClick={() => navigate("/connectionlevel")} title="Voltar aos Níveis" />
         </div>
       )}

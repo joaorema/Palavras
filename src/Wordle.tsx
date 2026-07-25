@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button1 from "./components/button1";
 import Button2 from "./components/button2";
 import "./css/wordle.css";
+import { isValidWordleGuess } from "./data/wordleDictionary";
 import { getWordleWord, WORDLE_WORDS } from "./data/wordleLevels";
 import { supabase } from "./supabaseClient";
 
@@ -36,6 +37,7 @@ function WordleGame() {
   const [won, setWon] = useState(false);
   const [letterStatus, setLetterStatus] = useState<Record<string, LetterStatus>>({});
   const [showInstructions, setShowInstructions] = useState(true);
+  const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
     if (!targetWord) {
@@ -50,6 +52,7 @@ function WordleGame() {
     setGameOver(false);
     setWon(false);
     setLetterStatus({});
+    setFeedback("");
   }, []);
 
   const saveProgress = useCallback(async () => {
@@ -102,10 +105,12 @@ function WordleGame() {
   );
 
   const handleKeyPress = useCallback((letter: string) => {
+    setFeedback("");
     setCurrentGuess((guess) => (guess.length < WORD_LENGTH ? guess + letter : guess));
   }, []);
 
   const handleDelete = useCallback(() => {
+    setFeedback("");
     setCurrentGuess((guess) => guess.slice(0, -1));
   }, []);
 
@@ -113,10 +118,16 @@ function WordleGame() {
     if (!targetWord) return;
 
     if (currentGuess.length !== WORD_LENGTH) {
-      alert("Palavra incompleta!");
+      setFeedback("Palavra incompleta.");
       return;
     }
 
+    if (!isValidWordleGuess(currentGuess)) {
+      setFeedback("Essa palavra nao esta na lista.");
+      return;
+    }
+
+    setFeedback("");
     const newGuesses = [...guesses];
     newGuesses[currentRow] = currentGuess;
     setGuesses(newGuesses);
@@ -147,6 +158,11 @@ function WordleGame() {
       replace: true,
       state: { levelNumber: levelNumber + 1 },
     });
+  };
+
+  const handleTryAgain = () => {
+    resetGame();
+    setShowInstructions(false);
   };
 
   useEffect(() => {
@@ -232,6 +248,10 @@ function WordleGame() {
         ))}
       </div>
 
+      <div className="wordle-feedback font-mono" role="status" aria-live="polite">
+        {feedback}
+      </div>
+
       <div className="wordle-keyboard font-mono mt-4">
         {KEYBOARD_ROWS.map((row) => (
           <div key={row.join("")} className="keyboard-row">
@@ -264,6 +284,7 @@ function WordleGame() {
             {won ? "✓ Ganhaste!" : "✗ Nao foi desta!"}
           </div>
           {won && hasNextLevel && <Button2 onClick={handleNextLevel} title="Next level" />}
+          {!won && <Button2 onClick={handleTryAgain} title="Try again" />}
           <Button2 onClick={() => navigate("/wordlelevel")} title="Voltar aos Níveis" />
         </div>
       ) : (
