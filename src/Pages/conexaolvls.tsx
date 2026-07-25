@@ -179,4 +179,10 @@ export const levels = [
     { words: ["Arraia", "Raia", "Linha", "Limite"], category: "Fronteira", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Bago", "Grao", "Semente", "Pevide"], category: "Coisas pequenas de fruto", difficulty: "medio", color: "#ba81c5" },
   ],
+  [
+    { words: ["Engodo", "Logro", "Embuste", "Ardil"], category: "Engano", difficulty: "dificil", color: "#f9df6d" },
+    { words: ["Tojo", "Urze", "Giesta", "Esteva"], category: "Arbustos da paisagem portuguesa", difficulty: "dificil", color: "#a0c35a" },
+    { words: ["Adarga", "Elmo", "Cota", "Broquel"], category: "Protecao medieval", difficulty: "muito dificil", color: "#b0c4ef" },
+    { words: ["Alforge", "Bornal", "Tarro", "Cabaca"], category: "Recipientes tradicionais do campo", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
