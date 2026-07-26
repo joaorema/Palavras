@@ -185,4 +185,10 @@ export const levels = [
     { words: ["Adarga", "Elmo", "Cota", "Broquel"], category: "Protecao medieval", difficulty: "muito dificil", color: "#b0c4ef" },
     { words: ["Alforge", "Bornal", "Tarro", "Cabaca"], category: "Recipientes tradicionais do campo", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Ermo", "Baldio", "Charneca", "Mato"], category: "Terrenos incultos", difficulty: "medio", color: "#f9df6d" },
+    { words: ["Fole", "Tenaz", "Aticador", "Trempe"], category: "Utensilios de lareira", difficulty: "dificil", color: "#a0c35a" },
+    { words: ["Dobre", "Repique", "Badalada", "Trindades"], category: "Toques de sino", difficulty: "muito dificil", color: "#b0c4ef" },
+    { words: ["Rabelo", "Moliceiro", "Varino", "Saveiro"], category: "Embarcacoes tradicionais", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
