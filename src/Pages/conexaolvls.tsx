@@ -191,4 +191,10 @@ export const levels = [
     { words: ["Dobre", "Repique", "Badalada", "Trindades"], category: "Toques de sino", difficulty: "muito dificil", color: "#b0c4ef" },
     { words: ["Rabelo", "Moliceiro", "Varino", "Saveiro"], category: "Embarcacoes tradicionais", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Carda", "Fuso", "Meada", "Urdidura"], category: "Trabalho textil tradicional", difficulty: "dificil", color: "#f9df6d" },
+    { words: ["Algar", "Dolina", "Lapa", "Polje"], category: "Formacoes de relevo carsico", difficulty: "muito dificil", color: "#a0c35a" },
+    { words: ["Infusa", "Caneco", "Odre", "Cantaro"], category: "Recipientes tradicionais para liquidos", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Arrulho", "Bramido", "Chilreio", "Zurrar"], category: "Vozes ou sons de animais", difficulty: "medio", color: "#ba81c5" },
+  ],
 ];
