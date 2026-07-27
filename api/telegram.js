@@ -74,7 +74,6 @@ async function createGitHubIssue({ from, text }) {
     body: JSON.stringify({
       title: `Telegram: ${title}`,
       body,
-      labels: ["telegram-request"],
     }),
   });
 
