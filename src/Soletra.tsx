@@ -277,9 +277,9 @@ function SoletraGame() {
 
           <div className="soletra-actions">
             <button onClick={deleteLetter}>Apagar</button>
+            <button onClick={clearWord}>Limpar</button>
             <button onClick={handleShuffle}>Rodar</button>
             <button onClick={submitWord}>Submeter</button>
-            <button onClick={clearWord}>Limpar</button>
           </div>
 
           <p className={`soletra-message soletra-message-${messageKind}`} role="status" aria-live="polite">
