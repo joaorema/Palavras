@@ -197,4 +197,10 @@ export const levels = [
     { words: ["Infusa", "Caneco", "Odre", "Cantaro"], category: "Recipientes tradicionais para liquidos", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Arrulho", "Bramido", "Chilreio", "Zurrar"], category: "Vozes ou sons de animais", difficulty: "medio", color: "#ba81c5" },
   ],
+  [
+    { words: ["Geada", "Orvalho", "Nevoeiro", "Granizo"], category: "Fenomenos meteorologicos", difficulty: "medio", color: "#f9df6d" },
+    { words: ["Xavega", "Cerco", "Arrasto", "Palangre"], category: "Artes de pesca", difficulty: "dificil", color: "#a0c35a" },
+    { words: ["Nave", "Abside", "Transepto", "Sacristia"], category: "Partes de uma igreja", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Nortada", "Suao", "Levante", "Terral"], category: "Ventos em Portugal", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
