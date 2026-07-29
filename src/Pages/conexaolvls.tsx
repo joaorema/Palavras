@@ -203,4 +203,10 @@ export const levels = [
     { words: ["Adarga", "Elmo", "Cota", "Broquel"], category: "Protecao medieval", difficulty: "muito dificil", color: "#b0c4ef" },
     { words: ["Quina", "Zimbo", "Sestro", "Eivar"], category: "Palavras portuguesas raras", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Arrulho", "Bramido", "Chilreio", "Relincho"], category: "Vozes de animais", difficulty: "dificil", color: "#f9df6d" },
+    { words: ["Alqueire", "Almude", "Arratel", "Covado"], category: "Medidas portuguesas antigas", difficulty: "muito dificil", color: "#a0c35a" },
+    { words: ["Sapal", "Paul", "Varzea", "Leziria"], category: "Terrenos humidos", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Fole", "Tenaz", "Aticador", "Trempe"], category: "Utensilios de lareira", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
