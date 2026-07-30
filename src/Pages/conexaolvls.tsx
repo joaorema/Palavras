@@ -209,4 +209,10 @@ export const levels = [
     { words: ["Sapal", "Paul", "Varzea", "Leziria"], category: "Terrenos humidos", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Fole", "Tenaz", "Aticador", "Trempe"], category: "Utensilios de lareira", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Galinha", "Pato", "Peru", "Ganso"], category: "Aves de capoeira", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Estrela", "Geres", "Lousa", "Monchique"], category: "Serras portuguesas", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Coxia", "Ribalta", "Proscenio", "Fosso"], category: "Partes de um teatro", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Cicero", "Gralha", "Versal", "Vinheta"], category: "Termos de tipografia", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
