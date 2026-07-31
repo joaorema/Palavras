@@ -56,6 +56,7 @@ export const WORDLE_WORDS = [
   "NACAR",
   "CODEA",
   "ACUME",
+  "PIFIO",
 ] as const;
 
 export function getWordleWord(levelNumber: number) {

@@ -215,4 +215,10 @@ export const levels = [
     { words: ["Coxia", "Ribalta", "Proscenio", "Fosso"], category: "Partes de um teatro", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Cicero", "Gralha", "Versal", "Vinheta"], category: "Termos de tipografia", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Agulha", "Dedal", "Tesoura", "Alfinete"], category: "Acessorios de costura", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Flauta", "Oboe", "Fagote", "Clarinete"], category: "Instrumentos de sopro de madeira", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Javali", "Texugo", "Gineta", "Corco"], category: "Mamiferos selvagens de Portugal", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Ataque", "Regra", "Peso", "Baixo"], category: "Formam palavra com contra-", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
