@@ -221,4 +221,10 @@ export const levels = [
     { words: ["Javali", "Texugo", "Gineta", "Corco"], category: "Mamiferos selvagens de Portugal", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Ataque", "Regra", "Peso", "Baixo"], category: "Formam palavra com contra-", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Lima", "Limao", "Tangerina", "Toranja"], category: "Frutos citricos", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Faial", "Corvo", "Graciosa", "Terceira"], category: "Ilhas dos Acores", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Couraca", "Grevas", "Manoplas", "Viseira"], category: "Pecas de uma armadura", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Cabecas", "Nozes", "Mares", "Luz"], category: "Formam palavra com quebra-", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
