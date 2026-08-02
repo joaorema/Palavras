@@ -227,4 +227,10 @@ export const levels = [
     { words: ["Couraca", "Grevas", "Manoplas", "Viseira"], category: "Pecas de uma armadura", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Cabecas", "Nozes", "Mares", "Luz"], category: "Formam palavra com quebra-", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Pombo", "Pardal", "Melro", "Gaivota"], category: "Aves urbanas", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Evaporacao", "Condensacao", "Precipitacao", "Infiltracao"], category: "Processos do ciclo da agua", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Objetiva", "Diafragma", "Obturador", "Tripe"], category: "Elementos de fotografia", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Quedas", "Brisas", "Choques", "Raios"], category: "Formam palavra com para-", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
