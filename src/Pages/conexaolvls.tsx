@@ -233,4 +233,10 @@ export const levels = [
     { words: ["Objetiva", "Diafragma", "Obturador", "Tripe"], category: "Elementos de fotografia", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Quedas", "Brisas", "Choques", "Raios"], category: "Formam palavra com para-", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Broa", "Regueifa", "Carcaca", "Bijou"], category: "Paes portugueses", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Cirro", "Estrato", "Cumulo", "Nimbo"], category: "Tipos de nuvem", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Aguia", "Falcao", "Acor", "Milhafre"], category: "Aves de rapina", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Azimute", "Meridiano", "Paralelo", "Legenda"], category: "Termos de cartografia", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
