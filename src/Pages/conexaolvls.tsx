@@ -239,4 +239,10 @@ export const levels = [
     { words: ["Aguia", "Falcao", "Acor", "Milhafre"], category: "Aves de rapina", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Azimute", "Meridiano", "Paralelo", "Legenda"], category: "Termos de cartografia", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Sobreiro", "Azinheira", "Medronheiro", "Carvalho"], category: "Arvores comuns em Portugal", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Arriba", "Restinga", "Tombolo", "Cordao"], category: "Formacoes costeiras", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Caravela", "Escuna", "Brigue", "Lugre"], category: "Embarcacoes a vela", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Barometro", "Higrometro", "Anemometro", "Pluviometro"], category: "Instrumentos meteorologicos", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
