@@ -245,4 +245,10 @@ export const levels = [
     { words: ["Caravela", "Escuna", "Brigue", "Lugre"], category: "Embarcacoes a vela", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Barometro", "Higrometro", "Anemometro", "Pluviometro"], category: "Instrumentos meteorologicos", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Ganga", "Veludo", "Cetim", "Linho"], category: "Tecidos", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Cratera", "Caldeira", "Fumarola", "Cone"], category: "Formacoes vulcanicas", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Abertura", "Aria", "Recitativo", "Libreto"], category: "Partes de uma opera", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Astrolabio", "Sextante", "Quadrante", "Balestilha"], category: "Instrumentos de navegacao astronomica", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
