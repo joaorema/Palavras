@@ -251,4 +251,10 @@ export const levels = [
     { words: ["Abertura", "Aria", "Recitativo", "Libreto"], category: "Partes de uma opera", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Astrolabio", "Sextante", "Quadrante", "Balestilha"], category: "Instrumentos de navegacao astronomica", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Granito", "Basalto", "Marmore", "Xisto"], category: "Rochas", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Xilogravura", "Litografia", "Aguaforte", "Serigrafia"], category: "Tecnicas de gravura", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Foral", "Tombo", "Bula", "Diploma"], category: "Documentos historicos", difficulty: "medio", color: "#b0c4ef" },
+    { words: ["Iris", "Voltaico", "Cego", "Triunfo"], category: "Seguem arco", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
