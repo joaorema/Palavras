@@ -257,4 +257,10 @@ export const levels = [
     { words: ["Foral", "Tombo", "Bula", "Diploma"], category: "Documentos historicos", difficulty: "medio", color: "#b0c4ef" },
     { words: ["Iris", "Voltaico", "Cego", "Triunfo"], category: "Seguem arco", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Argiloso", "Arenoso", "Calcario", "Humifero"], category: "Tipos de solo", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Azeitao", "Nisa", "Serpa", "Rabacal"], category: "Queijos portugueses", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Cumeeira", "Beiral", "Asna", "Ripado"], category: "Partes de um telhado", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Papiro", "Pergaminho", "Tabuinha", "Ostraco"], category: "Suportes de escrita antigos", difficulty: "dificil", color: "#ba81c5" },
+  ],
 ];
