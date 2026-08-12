@@ -263,4 +263,10 @@ export const levels = [
     { words: ["Cumeeira", "Beiral", "Asna", "Ripado"], category: "Partes de um telhado", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Papiro", "Pergaminho", "Tabuinha", "Ostraco"], category: "Suportes de escrita antigos", difficulty: "dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Nascente", "Afluente", "Meandro", "Estuario"], category: "Elementos de um curso de agua", difficulty: "medio", color: "#f9df6d" },
+    { words: ["Salga", "Fumagem", "Cura", "Escabeche"], category: "Conservacao de alimentos", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Clepsidra", "Ampulheta", "Gnomon", "Cronometro"], category: "Instrumentos para medir o tempo", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Tremonha", "Moega", "Rodizio", "Segurelha"], category: "Partes de um moinho tradicional", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
