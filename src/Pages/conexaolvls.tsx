@@ -269,4 +269,10 @@ export const levels = [
     { words: ["Clepsidra", "Ampulheta", "Gnomon", "Cronometro"], category: "Instrumentos para medir o tempo", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Tremonha", "Moega", "Rodizio", "Segurelha"], category: "Partes de um moinho tradicional", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Oleiro", "Roda", "Barro", "Forno"], category: "Oficina de ceramica", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Fisico", "Politico", "Topografico", "Tematico"], category: "Tipos de mapa", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Dorica", "Jonica", "Corintia", "Toscana"], category: "Ordens arquitetonicas classicas", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Ameia", "Baluarte", "Revelim", "Barbaca"], category: "Elementos de uma fortificacao", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
