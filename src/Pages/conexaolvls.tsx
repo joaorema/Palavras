@@ -275,4 +275,10 @@ export const levels = [
     { words: ["Dorica", "Jonica", "Corintia", "Toscana"], category: "Ordens arquitetonicas classicas", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Ameia", "Baluarte", "Revelim", "Barbaca"], category: "Elementos de uma fortificacao", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Feijao", "Ervilha", "Lentilha", "Tremoco"], category: "Leguminosas", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Anta", "Menir", "Cromeleque", "Mamoa"], category: "Estruturas megaliticas", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Circo", "Morena", "Fiorde", "Drumlin"], category: "Formacoes glaciares", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Vilancete", "Sextina", "Rondel", "Vilanela"], category: "Formas poeticas fixas", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];

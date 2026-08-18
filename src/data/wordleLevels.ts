@@ -66,6 +66,7 @@ export const WORDLE_WORDS = [
   "XUCRO",
   "GABRO",
   "TAFUL",
+  "ZEBRO",
 ] as const;
 
 export function getWordleWord(levelNumber: number) {
