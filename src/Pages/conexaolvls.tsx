@@ -281,4 +281,10 @@ export const levels = [
     { words: ["Circo", "Morena", "Fiorde", "Drumlin"], category: "Formacoes glaciares", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Vilancete", "Sextina", "Rondel", "Vilanela"], category: "Formas poeticas fixas", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Mogno", "Faia", "Teca", "Ebano"], category: "Tipos de madeira", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Refracao", "Difracao", "Interferencia", "Dispersao"], category: "Fenomenos opticos", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Arcao", "Estribo", "Loros", "Cilha"], category: "Partes de uma sela", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Timbre", "Paquife", "Virol", "Lambel"], category: "Termos de heraldica", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
