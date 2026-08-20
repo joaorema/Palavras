@@ -287,4 +287,10 @@ export const levels = [
     { words: ["Arcao", "Estribo", "Loros", "Cilha"], category: "Partes de uma sela", difficulty: "dificil", color: "#b0c4ef" },
     { words: ["Timbre", "Paquife", "Virol", "Lambel"], category: "Termos de heraldica", difficulty: "muito dificil", color: "#ba81c5" },
   ],
+  [
+    { words: ["Choco", "Lula", "Ostra", "Mexilhao"], category: "Moluscos marinhos", difficulty: "facil", color: "#f9df6d" },
+    { words: ["Faianca", "Porcelana", "Gres", "Terracota"], category: "Materiais ceramicos", difficulty: "medio", color: "#a0c35a" },
+    { words: ["Uncial", "Carolina", "Gotica", "Cursiva"], category: "Tipos de escrita antiga", difficulty: "dificil", color: "#b0c4ef" },
+    { words: ["Lais", "Escota", "Catau", "Fateixa"], category: "Nos nauticos", difficulty: "muito dificil", color: "#ba81c5" },
+  ],
 ];
